@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Web Design Club — Price Calculator</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#000000">
+<meta name="color-scheme" content="dark">
+<style>
+:root{
+  --bg:#070c16;
+  --panel:#0e1528;
+  --ink:#e7f0ff;
+  --muted:#a9b9d7;
+  --line:rgba(255,255,255,.08);
+  --brand:#38bdf8;
+  --brand-2:#0ea5e9;
+  --radius:18px;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{
+  margin:0;height:100%;
+  background:
+    radial-gradient(60% 40% at 120% -10%, rgba(56,189,248,.18), transparent 60%),
+    radial-gradient(70% 60% at -20% 10%, rgba(14,165,233,.16), transparent 65%),
+    var(--bg);
+  color:var(--ink);
+  font-family:Inter,system-ui,Segoe UI,Roboto,Arial,sans-serif;
+}
+.app{max-width:1000px;margin:0 auto;padding:20px;display:flex;align-items:center;justify-content:center;min-height:100dvh}
+.card{
+  width:min(96vw,880px);
+  background:rgba(14,21,40,0.88);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  padding:22px;
+  position:relative;
+  box-shadow:0 0 54px rgba(56,189,248,.45), 0 0 120px rgba(56,189,248,.22);
+  backdrop-filter: blur(18px) saturate(120%);
+  overflow:hidden;
+  animation:cardIn .6s ease-out both;
+}
+@keyframes cardIn{from{opacity:0;transform:translateY(12px) scale(.985)} to{opacity:1;transform:none}}
+.card::before{content:none;}
+.card::after{
+  content:''; position:absolute; left:12%; right:12%; top:0; height:3px;
+  background:linear-gradient(90deg, transparent, var(--brand), transparent);
+  filter:drop-shadow(0 0 12px var(--brand));
+  animation:glowSweep 4s ease-in-out infinite; opacity:.9;
+}
+@keyframes glowSweep{0%,100%{transform:translateX(0)}50%{transform:translateX(4px)}}
+
+.header{text-align:center;margin-bottom:14px}
+.logo{width:74px;height:74px;border-radius:16px;overflow:hidden;margin:0 auto 6px;
+  box-shadow:0 10px 30px rgba(56,189,248,.45), inset 0 0 0 1px rgba(255,255,255,.06)}
+.logo img{width:100%;height:100%;object-fit:cover;display:block}
+.title{font-weight:900;font-size:clamp(20px,5vw,26px);letter-spacing:.2px;margin:0;
+  background:linear-gradient(90deg,#fff,#d8e8ff);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  text-shadow:0 0 24px rgba(56,189,248,.12);
+}
+.sub{margin:6px 0 2px;color:var(--muted);font-size:12.5px;text-align:center}
+
+.grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:14px}
+@media(min-width:900px){.grid{grid-template-columns:1.1fr .9fr}}
+
+.section{
+  background:linear-gradient(180deg,#0b1326,#0a1222);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:14px;
+  padding:14px;
+}
+.section h3{
+  margin:0 0 10px 0;font-size:14px;letter-spacing:.2px;color:#d6e6ff;font-weight:800
+}
+
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.row-1{display:grid;grid-template-columns:1fr;gap:10px}
+@media(max-width:480px){.row{grid-template-columns:1fr}}
+
+label{font-size:12.5px;color:var(--muted);font-weight:600;margin-bottom:6px;display:block}
+input[type=number], select, .pill{
+  width:100%;padding:12px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.15);
+  background:rgba(255,255,255,.04);color:var(--ink);font-size:14px;
+}
+input:focus,select:focus{outline:none;border-color:var(--brand);box-shadow:0 0 0 2px rgba(56,189,248,.28)}
+
+.check{
+  display:flex;align-items:center;gap:10px;background:rgba(255,255,255,.03);
+  border:1px solid rgba(255,255,255,.12);padding:10px 12px;border-radius:12px
+}
+.check input{accent-color:var(--brand);width:18px;height:18px}
+
+.small{font-size:12px;color:var(--muted)}
+.mono{font-variant-numeric:tabular-nums; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;}
+
+.result{
+  display:grid;gap:10px;
+  background:linear-gradient(180deg,#0d1429,#0b1326);
+  border:1px solid rgba(255,255,255,.06);
+  border-radius:14px;padding:14px
+}
+.line{display:flex;justify-content:space-between;gap:10px}
+.hr{height:1px;background:rgba(255,255,255,.07);margin:6px 0;border-radius:1px}
+
+.total{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:12px;border-radius:12px;
+  background:linear-gradient(90deg,var(--brand-2),var(--brand));
+  color:#061223;font-weight:900
+}
+
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+.btn{
+  appearance:none;border:none;border-radius:12px;padding:10px 14px;font-weight:800;letter-spacing:.2px;cursor:pointer;
+  background:linear-gradient(90deg,var(--brand-2),var(--brand));color:#071225;
+  box-shadow:0 12px 32px rgba(56,189,248,.28);transition:transform .1s ease,opacity .12s ease
+}
+.btn.secondary{background:rgba(255,255,255,.05);color:#e6f2ff;border:1px solid rgba(255,255,255,.12)}
+.btn:active{transform:translateY(1px)} .btn:hover{opacity:.95}
+
+.badge{font-size:11px;color:#b9c9e6}
+.right{text-align:right}
+
+.notice{margin-top:6px;font-size:12px;color:#9fb2d3}
+@media (prefers-reduced-motion: reduce){*{animation:none !important;transition:none !important}}
+</style>
+</head>
+<body>
+<main class="app" role="application" aria-label="Web Design Club Price Calculator">
+  <section class="card">
+    <header class="header">
+      <div class="logo"><img src=" IMG_6662.jpeg" alt="Web Design Club logo"></div>
+      <h1 class="title">Price Calculator</h1>
+      <p class="sub">Estimate one-time & monthly with live breakdown and margin.</p>
+    </header>
+
+    <div class="grid">
+
+      <!-- LEFT: Inputs -->
+      <div class="section">
+        <h3>Project</h3>
+        <div class="row">
+          <div>
+            <label for="type">Type</label>
+            <select id="type">
+              <option value="landing">Landing Page</option>
+              <option value="website">Multi-page Website</option>
+              <option value="ecom">E-commerce</option>
+              <option value="redesign">Redesign</option>
+            </select>
+          </div>
+          <div>
+            <label for="pages">Pages</label>
+            <input id="pages" type="number" min="1" value="1">
+            <div class="small">Landing Page = 1</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="cms">CMS / Platform</label>
+            <select id="cms">
+              <option value="framer">Framer</option>
+              <option value="webflow">Webflow</option>
+              <option value="wordpress">WordPress</option>
+              <option value="custom">Custom (React/Next)</option>
+            </select>
+          </div>
+          <div>
+            <label for="complex">Design Complexity</label>
+            <select id="complex">
+              <option value="basic">Basic</option>
+              <option value="standard" selected>Standard</option>
+              <option value="premium">Premium</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="check">
+            <input id="speed" type="checkbox"><label for="speed">Speed Optimization</label>
+          </div>
+          <div class="check">
+            <input id="a11y" type="checkbox"><label for="a11y">Accessibility Essentials</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="copyPages">Copywriting Pages</label>
+            <input id="copyPages" type="number" min="0" value="0">
+            <div class="small">Auto-set = same as Pages</div>
+          </div>
+          <div>
+            <label for="seo">SEO Package</label>
+            <select id="seo">
+              <option value="none">None</option>
+              <option value="basic">Basic (one-time)</option>
+              <option value="advanced">Advanced (one-time)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row-1">
+          <div class="check"><input id="int_form" type="checkbox"><label for="int_form">Forms & Contact</label></div>
+          <div class="check"><input id="int_booking" type="checkbox"><label for="int_booking">Booking/Calendar</label></div>
+          <div class="check"><input id="int_analytics" type="checkbox"><label for="int_analytics">Analytics</label></div>
+          <div class="check"><input id="int_crm" type="checkbox"><label for="int_crm">CRM/Email Integration</label></div>
+          <div class="check"><input id="int_pay" type="checkbox"><label for="int_pay">Payments/Checkout</label></div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="revs">Extra Revision Rounds</label>
+            <input id="revs" type="number" min="0" value="0">
+            <div class="small">2 rounds included</div>
+          </div>
+          <div>
+            <label for="rush">Timeline</label>
+            <select id="rush">
+              <option value="normal">Normal</option>
+              <option value="priority">Priority (7 days)</option>
+              <option value="express">Express (72h)</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="maint">Maintenance (Monthly €)</label>
+            <input id="maint" type="number" min="0" value="0">
+          </div>
+          <div>
+            <label for="seoMonthly">SEO Ongoing (Monthly €)</label>
+            <input id="seoMonthly" type="number" min="0" value="0">
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="rate">My Hourly Rate (€)</label>
+            <input id="rate" type="number" min="0" value="50">
+          </div>
+          <div>
+            <label for="hours">Estimated Hours</label>
+            <input id="hours" type="number" min="0" value="0">
+            <div class="small">0 = auto-estimate</div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div>
+            <label for="discount">Discount (e.g. 10% or 100)</label>
+            <input id="discount" type="text" placeholder="optional">
+          </div>
+          <div>
+            <label for="vatRate">VAT % (toggle below)</label>
+            <input id="vatRate" type="number" min="0" value="19">
+            <div class="check" style="margin-top:8px;">
+              <input id="applyVat" type="checkbox" checked>
+              <label for="applyVat">Apply VAT</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="btns">
+          <button class="btn" id="copy">Copy Quote</button>
+          <button class="btn secondary" id="reset">Reset</button>
+          <span class="badge">All values auto-save</span>
+        </div>
+      </div>
+
+      <!-- RIGHT: Breakdown -->
+      <div class="section">
+        <h3>Estimate</h3>
+        <div class="result" id="out">
+          <!-- populated by JS -->
+        </div>
+        <p class="notice">Note: This is an estimate. Final scope may adjust pricing.</p>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<script>
+const KEY='wdc_pricecalc_v1';
+
+const PRICING = {
+  base:{
+    landing:400,
+    website:800,
+    ecom:1500,
+    redesign:600
+  },
+  extraPage:120,                 // per page beyond 1
+  copyPerPage:60,                // per page copywriting
+  revisions:{ included:2, extraPer:80 },
+  cmsMult:{ framer:1.00, webflow:1.20, wordpress:1.15, custom:1.35 },
+  complexity:{ basic:1.00, standard:1.25, premium:1.50 },
+  options:{
+    speed:150, a11y:150,
+    integrations:{ form:40, booking:120, analytics:35, crm:180, pay:150 }
+  },
+  rushMult:{ normal:1.00, priority:1.20, express:1.35 },
+  seo:{ none:0, basic:200, advanced:500 }
+};
+
+// ---- helpers
+const $=q=>document.querySelector(q);
+const $out = $('#out');
+
+function num(v,def=0){ const n=parseFloat(v); return isNaN(n)?def:n; }
+
+function parseDiscount(v, base){
+  if(!v) return 0;
+  v = v.trim();
+  if(v.endsWith('%')){
+    const p = num(v.replace('%',''),0);
+    return Math.max(0, Math.min(base, base*(p/100)));
+  }
+  return Math.max(0, Math.min(base, num(v,0)));
+}
+
+function autoEstimateHours(state){
+  // base hours by type
+  const base = { landing:10, website:24, ecom:40, redesign:16 }[state.type] || 12;
+  const perPage = 3;
+  const extraPages = Math.max(0, state.pages-1);
+  let h = base + extraPages*perPage;
+
+  // complexity & cms multipliers influence hours too
+  const cMult = PRICING.complexity[state.complex] || 1;
+  const cmsMult = PRICING.cmsMult[state.cms] || 1;
+  h *= (0.9 + 0.15*cMult); // subtle bump
+  h *= (0.95 + 0.1*cmsMult);
+
+  // options & integrations
+  if(state.speed) h += 2;
+  if(state.a11y) h += 2;
+  if(state.int_form) h += 0.5;
+  if(state.int_booking) h += 2;
+  if(state.int_analytics) h += 0.5;
+  if(state.int_crm) h += 2;
+  if(state.int_pay) h += 2.5;
+
+  // copywriting (roughly 0.7h/page)
+  h += Math.max(0, state.copyPages)*0.7;
+
+  // seo one-time tasks
+  if(state.seo==='basic') h += 2.5;
+  if(state.seo==='advanced') h += 5;
+
+  // revisions (beyond 2) ~0.8h each
+  h += Math.max(0, state.revs)*0.8;
+
+  return Math.round(h*10)/10;
+}
+
+function readState(){
+  const s = {
+    type: $('#type').value,
+    pages: Math.max(1, num($('#pages').value,1)),
+    cms: $('#cms').value,
+    complex: $('#complex').value,
+    speed: $('#speed').checked,
+    a11y: $('#a11y').checked,
+    copyPages: Math.max(0, num($('#copyPages').value,0)),
+    seo: $('#seo').value,
+    int_form: $('#int_form').checked,
+    int_booking: $('#int_booking').checked,
+    int_analytics: $('#int_analytics').checked,
+    int_crm: $('#int_crm').checked,
+    int_pay: $('#int_pay').checked,
+    revs: Math.max(0, num($('#revs').value,0)),
+    rush: $('#rush').value,
+    maint: Math.max(0, num($('#maint').value,0)),
+    seoMonthly: Math.max(0, num($('#seoMonthly').value,0)),
+    rate: Math.max(0, num($('#rate').value,50)),
+    hours: Math.max(0, num($('#hours').value,0)),
+    discount: $('#discount').value.trim(),
+    vatRate: Math.max(0, num($('#vatRate').value,19))/100,
+    applyVat: $('#applyVat').checked
+  };
+  // landing page lock pages=1
+  if(s.type==='landing'){ s.pages = 1; $('#pages').value = 1; }
+  // auto-sync copy pages default if empty
+  if($('#copyPages').value==='' || $('#copyPages').value==='0'){ s.copyPages = s.pages; $('#copyPages').value = s.pages; }
+  return s;
+}
+
+function calc(state){
+  const basePrice = PRICING.base[state.type] || 0;
+  const extraPages = Math.max(0, state.pages - 1);
+  const pagesCost = extraPages * PRICING.extraPage;
+
+  const cmsM = PRICING.cmsMult[state.cms] || 1;
+  const compM = PRICING.complexity[state.complex] || 1;
+
+  // options
+  let opts = 0;
+  if(state.speed) opts += PRICING.options.speed;
+  if(state.a11y) opts += PRICING.options.a11y;
+
+  // integrations
+  if(state.int_form) opts += PRICING.options.integrations.form;
+  if(state.int_booking) opts += PRICING.options.integrations.booking;
+  if(state.int_analytics) opts += PRICING.options.integrations.analytics;
+  if(state.int_crm) opts += PRICING.options.integrations.crm;
+  if(state.int_pay) opts += PRICING.options.integrations.pay;
+
+  // copywriting
+  const copyCost = Math.max(0, state.copyPages) * PRICING.copyPerPage;
+
+  // SEO (one-time)
+  const seoOnce = PRICING.seo[state.seo] || 0;
+
+  // revisions
+  const revsCost = Math.max(0, state.revs) * PRICING.revisions.extraPer;
+
+  // subtotal before multipliers
+  let subtotal = basePrice + pagesCost + copyCost + seoOnce + opts + revsCost;
+
+  // apply multipliers
+  subtotal *= cmsM * compM;
+
+  // rush multiplier (applies to whole one-time subtotal)
+  const rushM = PRICING.rushMult[state.rush] || 1;
+  const oneTimeBeforeDiscount = Math.round(subtotal * rushM);
+
+  // discount
+  const discountVal = parseDiscount(state.discount, oneTimeBeforeDiscount);
+  const oneTimeAfterDiscount = Math.max(0, oneTimeBeforeDiscount - discountVal);
+
+  // VAT
+  const vatAmount = state.applyVat ? Math.round(oneTimeAfterDiscount * state.vatRate) : 0;
+  const grandTotal = oneTimeAfterDiscount + vatAmount;
+
+  // monthly
+  const monthly = Math.round((state.maint + state.seoMonthly) * 100)/100;
+
+  // hours & margin
+  const estHours = state.hours>0 ? state.hours : autoEstimateHours(state);
+  const cost = Math.round(estHours * state.rate * 100)/100;
+  const margin = oneTimeAfterDiscount>0 ? Math.round((1 - cost / oneTimeAfterDiscount)*1000)/10 : 0;
+
+  return {
+    basePrice, pagesCost, copyCost, seoOnce, opts, revsCost,
+    cmsM, compM, rushM, discountVal, vatAmount,
+    oneTimeBeforeDiscount, oneTimeAfterDiscount, grandTotal, monthly,
+    estHours, cost, margin
+  };
+}
+
+function fmt(n){ return '€'+ (Math.round(n*100)/100).toLocaleString(undefined,{minimumFractionDigits:0, maximumFractionDigits:2}); }
+function pct(n){ return (Math.round(n*10)/10).toFixed(1)+'%'; }
+
+function render(){
+  const s = readState();
+  localStorage.setItem(KEY, JSON.stringify(s));
+  const r = calc(s);
+
+  // build breakdown
+  $out.innerHTML = `
+    <div class="line"><span>Base</span><span class="mono">${fmt(r.basePrice)}</span></div>
+    <div class="line"><span>Extra Pages</span><span class="mono">${fmt(r.pagesCost)}</span></div>
+    <div class="line"><span>Copywriting</span><span class="mono">${fmt(r.copyCost)}</span></div>
+    <div class="line"><span>SEO (one-time)</span><span class="mono">${fmt(r.seoOnce)}</span></div>
+    <div class="line"><span>Options & Integrations</span><span class="mono">${fmt(r.opts + r.revsCost)}</span></div>
+    <div class="hr"></div>
+    <div class="line"><span>CMS × Complexity</span><span class="mono">× ${(r.cmsM*r.compM).toFixed(2)}</span></div>
+    <div class="line"><span>Rush Multiplier</span><span class="mono">× ${r.rushM.toFixed(2)}</span></div>
+    <div class="hr"></div>
+    <div class="line"><span>Subtotal</span><span class="mono">${fmt(r.oneTimeBeforeDiscount)}</span></div>
+    <div class="line"><span>Discount</span><span class="mono">− ${fmt(r.discountVal)}</span></div>
+    <div class="line"><span>Subtotal after Discount</span><span class="mono">${fmt(r.oneTimeAfterDiscount)}</span></div>
+    <div class="line"><span>VAT ${Math.round(readState().vatRate*100)}% ${readState().applyVat?'(applied)':'(not applied)'}</span><span class="mono">${fmt(r.vatAmount)}</span></div>
+    <div class="total"><span>Total (one-time)</span><span class="mono">${fmt(r.grandTotal)}</span></div>
+    <div class="line"><span>Monthly (maintenance + ongoing SEO)</span><span class="mono">${fmt(r.monthly)}</span></div>
+    <div class="hr"></div>
+    <div class="line"><span>Estimated Hours</span><span class="mono">${r.estHours} h</span></div>
+    <div class="line"><span>Internal Cost (@ €${readState().rate}/h)</span><span class="mono">${fmt(r.cost)}</span></div>
+    <div class="line"><span>Margin</span><span class="mono">${pct(r.margin)}</span></div>
+  `;
+}
+
+function load(){
+  try{
+    const s = JSON.parse(localStorage.getItem(KEY));
+    if(!s) return;
+    $('#type').value = s.type;
+    $('#pages').value = s.pages;
+    $('#cms').value = s.cms;
+    $('#complex').value = s.complex;
+    $('#speed').checked = s.speed;
+    $('#a11y').checked = s.a11y;
+    $('#copyPages').value = s.copyPages;
+    $('#seo').value = s.seo;
+    $('#int_form').checked = s.int_form;
+    $('#int_booking').checked = s.int_booking;
+    $('#int_analytics').checked = s.int_analytics;
+    $('#int_crm').checked = s.int_crm;
+    $('#int_pay').checked = s.int_pay;
+    $('#revs').value = s.revs;
+    $('#rush').value = s.rush;
+    $('#maint').value = s.maint;
+    $('#seoMonthly').value = s.seoMonthly;
+    $('#rate').value = s.rate;
+    $('#hours').value = s.hours;
+    $('#discount').value = s.discount;
+    $('#vatRate').value = Math.round((s.vatRate||0.19)*100);
+    $('#applyVat').checked = !!s.applyVat;
+  }catch(e){}
+}
+
+function resetAll(){
+  localStorage.removeItem(KEY);
+  document.querySelectorAll('input,select').forEach(el=>{
+    if(el.type==='checkbox') el.checked=false;
+    else if(el.id==='rate') el.value=50;
+    else if(el.id==='pages' || el.id==='copyPages') el.value=1;
+    else if(el.id==='hours') el.value=0;
+    else if(el.id==='vatRate') el.value=19;
+    else el.value='';
+  });
+  $('#type').value='landing';
+  $('#cms').value='framer';
+  $('#complex').value='standard';
+  $('#seo').value='none';
+  $('#rush').value='normal';
+  $('#maint').value=0; $('#seoMonthly').value=0;
+  render();
+}
+
+function copyQuote(){
+  const txt = $out.innerText.replace(/\n{2,}/g,'\n');
+  navigator.clipboard.writeText(`Web Design Club — Quote\n${txt}`).then(()=>{
+    const btn = $('#copy'); const old = btn.textContent; btn.textContent='Copied ✓';
+    setTimeout(()=>btn.textContent=old,1200);
+  });
+}
+
+// listeners
+document.querySelectorAll('input,select').forEach(el=>{
+  el.addEventListener('input', render, {passive:true});
+  el.addEventListener('change', render, {passive:true});
+});
+$('#copy').addEventListener('click', e=>{ e.preventDefault(); copyQuote(); });
+$('#reset').addEventListener('click', e=>{ e.preventDefault(); resetAll(); });
+
+// init
+load(); render();
+</script>
+</body>
+</html>
