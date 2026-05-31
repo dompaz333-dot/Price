@@ -8,6 +8,14 @@
     "logo": "/images/brands/new-balance.svg"
   },
   {
+    "retailer": "Michael Kors",
+    "label": "Shop Michael Kors",
+    "description": "Leather goods and minimal tailoring picks from the seasonal edit.",
+    "url": "https://mavely.app.link/sM9Ih57OA3b",
+    "expires": null,
+    "logo": "/images/brands/michael-kors.svg"
+  },
+  {
     "code": "MALIK20",
     "retailer": "Stylink",
     "label": "20% off",
