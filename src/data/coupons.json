@@ -1,42 +1,18 @@
 [
   {
     "retailer": "New Balance",
-    "label": "Shop New Balance",
-    "description": "Heritage runners and clean leather. Tap through for the latest drop.",
+    "label": "Shop the edit.",
+    "description": "Heritage runners and clean leather — Malik's New Balance picks, worn into the looks. One tap, direct to New Balance, no middleman.",
     "url": "https://mavely.app.link/KRrQepyOA3b",
     "expires": null,
     "logo": "/images/brands/new-balance.svg"
   },
   {
     "retailer": "Michael Kors",
-    "label": "Shop Michael Kors",
-    "description": "Leather goods and minimal tailoring picks from the seasonal edit.",
+    "label": "Shop the edit.",
+    "description": "Minimal leather goods and seasonal tailoring — Malik's MK picks for the smart-casual wardrobe. One tap, direct to Michael Kors.",
     "url": "https://mavely.app.link/sM9Ih57OA3b",
     "expires": null,
     "logo": "/images/brands/michael-kors.svg"
-  },
-  {
-    "code": "MALIK20",
-    "retailer": "Stylink",
-    "label": "20% off",
-    "description": "20% off your first order at Stylink",
-    "url": "https://stylink.com/?ref=malikfits",
-    "expires": "2026-12-31"
-  },
-  {
-    "code": "FIT10",
-    "retailer": "LTK",
-    "label": "10% off",
-    "description": "10% off selected pieces curated by Malik",
-    "url": "https://shopltk.com/?ref=malikfits",
-    "expires": "2026-09-30"
-  },
-  {
-    "code": "MALIKAMZ",
-    "retailer": "Amazon",
-    "label": "Free shipping",
-    "description": "Free shipping on Malik's Amazon picks",
-    "url": "https://www.amazon.com/?tag=malikfits-20",
-    "expires": null
   }
 ]

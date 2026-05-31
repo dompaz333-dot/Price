@@ -98,10 +98,10 @@ const issueNumber   = String(Math.max(1, Math.floor((Date.now() - Date.parse('20
       <section class="page-max page-pad py-16 sm:py-24">
         <header class="flex items-end justify-between gap-6 mb-10">
           <div>
-            <p class="font-sans uppercase tracking-[0.18em] text-[10.5px] font-medium text-ink-soft">Editor's notes</p>
-            <h2 class="mt-3 font-serif font-light text-[34px] sm:text-[52px] leading-[1.02] text-ink tracking-[-0.02em]">Worth using.</h2>
+            <p class="font-sans uppercase tracking-[0.18em] text-[10.5px] font-medium text-ink-soft">Featured labels</p>
+            <h2 class="mt-3 font-serif font-light text-[34px] sm:text-[52px] leading-[1.02] text-ink tracking-[-0.02em]">Brands worth shopping.</h2>
           </div>
-          <a href="/coupons" class="btn-text">All codes →</a>
+          <a href="/coupons" class="btn-text">All brands →</a>
         </header>
         <div class="grid gap-4 sm:gap-5 sm:grid-cols-2">
           {topCoupons.map(c => <CouponCard coupon={c} compact={true} />)}
