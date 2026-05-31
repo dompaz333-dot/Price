@@ -1,5 +1,13 @@
 [
   {
+    "retailer": "New Balance",
+    "label": "Shop New Balance",
+    "description": "Heritage runners and clean leather. Tap through for the latest drop.",
+    "url": "https://mavely.app.link/KRrQepyOA3b",
+    "expires": null,
+    "logo": "/images/brands/new-balance.svg"
+  },
+  {
     "code": "MALIK20",
     "retailer": "Stylink",
     "label": "20% off",

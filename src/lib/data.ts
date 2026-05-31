@@ -35,12 +35,13 @@ export interface Category { slug: CategorySlug; label: string; image: string; }
 export interface Style    { slug: StyleSlug;    label: string; }
 
 export interface Coupon {
-  code: string;
+  code?: string;
   retailer: string;
   label: string;
   description: string;
   url: string;
   expires: string | null;
+  logo?: string;
 }
 
 export const products: Product[]     = productsJson as Product[];
