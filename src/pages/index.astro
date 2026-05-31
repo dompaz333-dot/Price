@@ -2,10 +2,12 @@
 import Base from '../layouts/Base.astro';
 import ProductCard from '../components/ProductCard.astro';
 import LookCard from '../components/LookCard.astro';
-import { newReleases, looks, categories } from '../lib/data';
+import CouponCard from '../components/CouponCard.astro';
+import { newReleases, looks, categories, activeCoupons } from '../lib/data';
 
 const featuredLooks = looks.slice(0, 4);
 const newDrops      = newReleases(10);
+const topCoupons    = activeCoupons().slice(0, 2);
 ---
 <Base>
   {/* HERO — big bold serif statement + search */}
@@ -94,6 +96,22 @@ const newDrops      = newReleases(10);
       </div>
     </div>
   </section>
+
+  {/* COUPONS — discovery */}
+  {topCoupons.length > 0 && (
+    <section class="page-max page-pad pb-20 sm:pb-28">
+      <div class="flex items-end justify-between gap-4 mb-8">
+        <div>
+          <p class="label mb-3">Deals · curated</p>
+          <h2 class="font-serif text-[32px] sm:text-[44px] leading-[1.02] text-ink tracking-[-0.01em]">Codes worth using.</h2>
+        </div>
+        <a href="/coupons" class="btn-secondary">All codes</a>
+      </div>
+      <div class="grid gap-4 sm:gap-5 sm:grid-cols-2">
+        {topCoupons.map(c => <CouponCard coupon={c} compact={true} />)}
+      </div>
+    </section>
+  )}
 
   {/* EDITORIAL — quiet luxury closing */}
   <section class="page-max page-pad pb-24 sm:pb-32">

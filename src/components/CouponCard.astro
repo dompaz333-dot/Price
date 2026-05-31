@@ -1,0 +1,49 @@
+---
+import type { Coupon } from '../lib/data';
+
+interface Props { coupon: Coupon; compact?: boolean; }
+const { coupon, compact = false } = Astro.props as Props;
+---
+<article class={`rounded-2xl bg-surface border border-hairline overflow-hidden ${compact ? 'p-5' : 'p-6 sm:p-7'}`}>
+  <div class="flex items-start justify-between gap-4">
+    <div class="min-w-0">
+      <p class="label">{coupon.retailer}</p>
+      <h3 class={`mt-2 font-serif text-ink leading-tight tracking-[-0.005em] ${compact ? 'text-[22px]' : 'text-[28px] sm:text-[32px]'}`}>{coupon.label}</h3>
+      {!compact && (
+        <p class="mt-2 text-ink-muted text-sm leading-relaxed max-w-md">{coupon.description}</p>
+      )}
+    </div>
+    {coupon.expires && (
+      <span class="shrink-0 inline-flex items-center h-6 px-2.5 rounded-full bg-bg border border-hairline uppercase tracking-label text-[10px] text-ink-muted font-medium">
+        Until {new Date(coupon.expires).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+      </span>
+    )}
+  </div>
+
+  <div class={`${compact ? 'mt-4' : 'mt-6'} flex flex-col sm:flex-row gap-2 sm:items-center`}>
+    <div class="flex-1 flex items-center gap-2 px-4 h-12 rounded-full bg-bg border border-dashed border-hairline">
+      <span class="label shrink-0">Code</span>
+      <code class="font-sans font-medium text-ink tracking-[0.04em] truncate" data-coupon-code>{coupon.code}</code>
+      <button
+        type="button"
+        class="ml-auto shrink-0 inline-flex items-center gap-1.5 h-8 px-3 rounded-full bg-ink text-bg uppercase tracking-button text-[10px] font-medium transition-opacity hover:opacity-90"
+        data-copy-code={coupon.code}
+        aria-label={`Copy code ${coupon.code}`}
+      >
+        <svg width="11" height="11" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <rect x="3.5" y="3.5" width="8" height="8" rx="1.2" stroke="currentColor" stroke-width="1.3"/>
+          <path d="M2.5 9.5V3a1 1 0 0 1 1-1H9" stroke="currentColor" stroke-width="1.3"/>
+        </svg>
+        <span data-copy-label>Copy</span>
+      </button>
+    </div>
+    <a
+      href={coupon.url}
+      target="_blank"
+      rel="noopener sponsored nofollow"
+      class="btn-primary !w-full sm:!w-auto"
+    >
+      Shop at {coupon.retailer}
+    </a>
+  </div>
+</article>

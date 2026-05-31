@@ -88,6 +88,33 @@ const canonicalUrl = canonical ?? siteUrl + Astro.url.pathname;
       });
 
       syncHearts();
+
+      // Copy-to-clipboard for coupon codes.
+      document.addEventListener('click', async (e) => {
+        const t = e.target as HTMLElement;
+        const btn = t.closest<HTMLButtonElement>('[data-copy-code]');
+        if (!btn) return;
+        e.preventDefault();
+        const code = btn.dataset.copyCode!;
+        const label = btn.querySelector<HTMLElement>('[data-copy-label]');
+        try {
+          await navigator.clipboard.writeText(code);
+        } catch {
+          const tmp = document.createElement('textarea');
+          tmp.value = code;
+          tmp.style.position = 'fixed';
+          tmp.style.opacity = '0';
+          document.body.appendChild(tmp);
+          tmp.select();
+          document.execCommand('copy');
+          document.body.removeChild(tmp);
+        }
+        if (label) {
+          const prev = label.textContent;
+          label.textContent = 'Copied';
+          window.setTimeout(() => { label.textContent = prev; }, 1600);
+        }
+      });
     </script>
   </body>
 </html>

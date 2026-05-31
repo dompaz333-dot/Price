@@ -1,0 +1,26 @@
+[
+  {
+    "code": "MALIK20",
+    "retailer": "Stylink",
+    "label": "20% off",
+    "description": "20% off your first order at Stylink",
+    "url": "https://stylink.com/?ref=malikfits",
+    "expires": "2026-12-31"
+  },
+  {
+    "code": "FIT10",
+    "retailer": "LTK",
+    "label": "10% off",
+    "description": "10% off selected pieces curated by Malik",
+    "url": "https://shopltk.com/?ref=malikfits",
+    "expires": "2026-09-30"
+  },
+  {
+    "code": "MALIKAMZ",
+    "retailer": "Amazon",
+    "label": "Free shipping",
+    "description": "Free shipping on Malik's Amazon picks",
+    "url": "https://www.amazon.com/?tag=malikfits-20",
+    "expires": null
+  }
+]

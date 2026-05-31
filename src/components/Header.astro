@@ -32,7 +32,7 @@ import { categories, styles } from '../lib/data';
           <input
             type="search"
             name="q"
-            placeholder="Search the catalog"
+            placeholder="Search"
             class="flex-1 min-w-0 bg-transparent border-0 outline-none text-[14px] text-ink placeholder:text-ink-soft"
           />
         </label>
@@ -50,46 +50,104 @@ import { categories, styles } from '../lib/data';
       </a>
     </div>
   </div>
+</header>
 
+{/* Drawer: fixed overlay, slides in from left, own scroll */}
+<div
+  id="site-menu"
+  hidden
+  class="fixed inset-0 z-50"
+  aria-modal="true"
+  role="dialog"
+  aria-label="Site navigation"
+>
+  <div id="menu-backdrop" class="absolute inset-0 bg-ink/40 backdrop-blur-sm opacity-0 transition-opacity duration-300"></div>
   <div
-    id="site-menu"
-    hidden
-    class="page-max page-pad mt-3"
+    id="menu-panel"
+    class="absolute inset-y-0 left-0 w-[88%] max-w-sm bg-bg border-r border-hairline overflow-y-auto -translate-x-full transition-transform duration-300 ease-out"
   >
-    <nav aria-label="Main" class="rounded-3xl bg-surface border border-hairline p-5 sm:p-6">
-      <a href="/" class="block w-full text-center rounded-full bg-ink text-bg py-3 font-serif text-[18px]">MalikFits</a>
+    <div class="sticky top-0 z-10 flex items-center justify-between gap-3 px-5 pt-5 pb-3 bg-bg/95 backdrop-blur">
+      <a href="/" class="font-serif text-[22px] tracking-[0.04em] text-ink leading-none" data-menu-close>MalikFits</a>
+      <button
+        type="button"
+        id="menu-close"
+        aria-label="Close menu"
+        class="w-10 h-10 -mr-2 rounded-full border border-hairline flex items-center justify-center text-ink hover:border-ink/40 transition-colors"
+      >
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <path d="m2 2 10 10M12 2 2 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
 
-      <p class="label mt-6 mb-3">Shop the fit</p>
+    <nav aria-label="Main" class="px-5 pb-8">
+      <p class="label mt-4 mb-3">Shop the fit</p>
       <ul class="grid gap-2">
-        <li><a class="flex items-center justify-between px-4 py-3 rounded-2xl bg-bg border border-hairline hover:border-ink/40 transition-colors" href="/outfits"><span>All looks</span><span aria-hidden="true">→</span></a></li>
+        <li><a class="flex items-center justify-between px-4 py-3 rounded-2xl bg-surface border border-hairline hover:border-ink/40 transition-colors" href="/outfits" data-menu-close><span>All looks</span><span aria-hidden="true">→</span></a></li>
         {styles.map(s => (
-          <li><a class="flex items-center justify-between px-4 py-3 rounded-2xl bg-bg border border-hairline hover:border-ink/40 transition-colors" href={`/outfits?style=${s.slug}`}><span>{s.label}</span><span aria-hidden="true">→</span></a></li>
+          <li><a class="flex items-center justify-between px-4 py-3 rounded-2xl bg-surface border border-hairline hover:border-ink/40 transition-colors" href={`/outfits?style=${s.slug}`} data-menu-close><span>{s.label}</span><span aria-hidden="true">→</span></a></li>
         ))}
       </ul>
 
       <p class="label mt-6 mb-3">Catalog</p>
       <ul class="grid gap-2">
-        <li><a class="flex items-center justify-between px-4 py-3 rounded-2xl bg-bg border border-hairline hover:border-ink/40 transition-colors" href="/catalog"><span>All products</span><span aria-hidden="true">→</span></a></li>
+        <li><a class="flex items-center justify-between px-4 py-3 rounded-2xl bg-surface border border-hairline hover:border-ink/40 transition-colors" href="/catalog" data-menu-close><span>All products</span><span aria-hidden="true">→</span></a></li>
         {categories.map(c => (
-          <li><a class="flex items-center justify-between px-4 py-3 rounded-2xl bg-bg border border-hairline hover:border-ink/40 transition-colors" href={`/catalog/${c.slug}`}><span>{c.label}</span><span aria-hidden="true">→</span></a></li>
+          <li><a class="flex items-center justify-between px-4 py-3 rounded-2xl bg-surface border border-hairline hover:border-ink/40 transition-colors" href={`/catalog/${c.slug}`} data-menu-close><span>{c.label}</span><span aria-hidden="true">→</span></a></li>
         ))}
+      </ul>
+
+      <p class="label mt-6 mb-3">Deals</p>
+      <ul class="grid gap-2">
+        <li><a class="flex items-center justify-between px-4 py-3 rounded-2xl bg-ink text-bg hover:opacity-90 transition-opacity" href="/coupons" data-menu-close><span>Coupons &amp; codes</span><span aria-hidden="true">→</span></a></li>
       </ul>
 
       <p class="label mt-6 mb-3">More</p>
       <ul class="grid gap-2">
-        <li><a class="flex items-center justify-between px-4 py-3 rounded-2xl bg-bg border border-hairline hover:border-ink/40 transition-colors" href="/about"><span>About Malik</span><span aria-hidden="true">→</span></a></li>
-        <li><a class="flex items-center justify-between px-4 py-3 rounded-2xl bg-bg border border-hairline hover:border-ink/40 transition-colors" href="/wishlist"><span>Wishlist</span><span aria-hidden="true">→</span></a></li>
+        <li><a class="flex items-center justify-between px-4 py-3 rounded-2xl bg-surface border border-hairline hover:border-ink/40 transition-colors" href="/about" data-menu-close><span>About Malik</span><span aria-hidden="true">→</span></a></li>
+        <li><a class="flex items-center justify-between px-4 py-3 rounded-2xl bg-surface border border-hairline hover:border-ink/40 transition-colors" href="/wishlist" data-menu-close><span>Wishlist</span><span aria-hidden="true">→</span></a></li>
       </ul>
     </nav>
   </div>
-</header>
+</div>
 
 <script>
-  const btn = document.getElementById('menu-toggle')!;
-  const nav = document.getElementById('site-menu')!;
-  btn.addEventListener('click', () => {
-    const open = nav.hasAttribute('hidden') ? false : true;
-    if (open) { nav.setAttribute('hidden', ''); btn.setAttribute('aria-expanded', 'false'); }
-    else      { nav.removeAttribute('hidden');  btn.setAttribute('aria-expanded', 'true');  }
-  });
+  const root     = document.getElementById('site-menu')!;
+  const backdrop = document.getElementById('menu-backdrop')!;
+  const panel    = document.getElementById('menu-panel')!;
+  const toggle   = document.getElementById('menu-toggle')!;
+  const closeBtn = document.getElementById('menu-close')!;
+
+  let isOpen = false;
+
+  const open = () => {
+    if (isOpen) return;
+    isOpen = true;
+    root.removeAttribute('hidden');
+    document.body.style.overflow = 'hidden';
+    toggle.setAttribute('aria-expanded', 'true');
+    // Force reflow so the transition runs from the initial state.
+    void panel.offsetWidth;
+    backdrop.classList.add('opacity-100');
+    backdrop.classList.remove('opacity-0');
+    panel.classList.remove('-translate-x-full');
+  };
+
+  const close = () => {
+    if (!isOpen) return;
+    isOpen = false;
+    backdrop.classList.add('opacity-0');
+    backdrop.classList.remove('opacity-100');
+    panel.classList.add('-translate-x-full');
+    toggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+    // Wait for the slide-out before hiding so the animation can finish.
+    window.setTimeout(() => { if (!isOpen) root.setAttribute('hidden', ''); }, 320);
+  };
+
+  toggle.addEventListener('click', open);
+  closeBtn.addEventListener('click', close);
+  backdrop.addEventListener('click', close);
+  root.querySelectorAll<HTMLElement>('[data-menu-close]').forEach(el => el.addEventListener('click', close));
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
 </script>
