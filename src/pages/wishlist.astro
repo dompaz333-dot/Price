@@ -64,7 +64,7 @@ const data = { products, looks };
     <article>
       <a href="/product/${p.id}" class="block">
         <div class="card-img"><img src="${p.image}" alt="${p.name}" loading="lazy" width="800" height="1000" />
-          ${p.isNew ? '<span class="badge-new">New</span>' : ''}
+          ${p.isNew ? '<span class="badge-new">New in</span>' : ''}
           <button type="button" class="heart-chip" data-wishlist-id="${p.id}" aria-pressed="true" data-saved="true" aria-label="Remove ${p.name}">
             <svg width="14" height="14" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
               <path d="M10 17s-6-3.5-6-8a3.5 3.5 0 0 1 6-2.45A3.5 3.5 0 0 1 16 9c0 4.5-6 8-6 8Z"/>

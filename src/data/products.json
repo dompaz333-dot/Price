@@ -1,4 +1,9 @@
 [
+  { "id": "everlane-essential-tee-white",   "name": "The Essential Organic Crew",       "category": "t-shirts",    "image": "/images/products/everlane-essential-tee-white.jpg", "price": 43,  "retailer": "Everlane",     "affiliateUrl": "https://mavely.app.link/CzkTUI7TA3b", "isNew": true },
+  { "id": "everlane-performance-chino",     "name": "The Performance Chino",            "category": "trousers",    "image": "/images/products/everlane-performance-chino.jpg",   "price": 135, "retailer": "Everlane",     "affiliateUrl": "https://mavely.app.link/YTrZUiiUA3b", "isNew": true },
+  { "id": "nb-990v6-grey",                  "name": "Made in USA 990v6",                "category": "shoes",       "image": "/images/products/nb-990v6-grey.jpg",                "price": 200, "retailer": "New Balance",  "affiliateUrl": "https://mavely.app.link/6mR9k3yWA3b", "isNew": true },
+  { "id": "mk-hudson-camera-bag",           "name": "Hudson Signature Logo Camera Bag", "category": "accessories", "image": "/images/products/mk-hudson-camera-bag.jpg",         "price": 170, "retailer": "Michael Kors", "affiliateUrl": "https://mavely.app.link/hGFS17nUA3b", "isNew": true },
+
   { "id": "tshirt-cream-boxy-001",      "name": "Cream Boxy Tee",            "category": "t-shirts",    "image": "/images/products/placeholder.svg", "price": 48,  "retailer": "Stylink", "affiliateUrl": "https://example.com/PLACEHOLDER-affiliate-link", "isNew": true },
   { "id": "tshirt-charcoal-heavy-002",  "name": "Charcoal Heavyweight Tee",  "category": "t-shirts",    "image": "/images/products/placeholder.svg", "price": 62,  "retailer": "LTK",     "affiliateUrl": "https://example.com/PLACEHOLDER-affiliate-link", "isNew": true },
   { "id": "tshirt-white-essential-003", "name": "White Essential Tee",       "category": "t-shirts",    "image": "/images/products/placeholder.svg", "price": 34,  "retailer": "Amazon",  "affiliateUrl": "https://example.com/PLACEHOLDER-affiliate-link", "isNew": false },

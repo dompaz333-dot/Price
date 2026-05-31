@@ -2,6 +2,7 @@
   { "slug": "t-shirts",   "label": "T-Shirts",    "image": "/images/categories/placeholder.svg" },
   { "slug": "shoes",      "label": "Shoes",       "image": "/images/categories/placeholder.svg" },
   { "slug": "jackets",    "label": "Jackets",     "image": "/images/categories/placeholder.svg" },
+  { "slug": "trousers",   "label": "Trousers",    "image": "/images/categories/placeholder.svg" },
   { "slug": "jeans",      "label": "Jeans",       "image": "/images/categories/placeholder.svg" },
   { "slug": "accessories","label": "Accessories", "image": "/images/categories/placeholder.svg" },
   { "slug": "shorts",     "label": "Shorts",      "image": "/images/categories/placeholder.svg" }

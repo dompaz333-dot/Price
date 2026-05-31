@@ -4,7 +4,7 @@ import { products, looks, categories } from '../lib/data';
 export const GET: APIRoute = ({ site }) => {
   const base = (site?.toString() ?? 'https://malikfits.example').replace(/\/$/, '');
   const urls: string[] = [
-    '/', '/catalog', '/outfits', '/search', '/wishlist', '/about',
+    '/', '/catalog', '/outfits', '/coupons', '/search', '/wishlist', '/about',
     ...categories.map(c => `/catalog/${c.slug}`),
     ...products.map(p => `/product/${p.id}`),
     ...looks.map(l => `/outfits/${l.id}`),

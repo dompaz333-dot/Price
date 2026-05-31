@@ -2,9 +2,10 @@ import productsJson from '../data/products.json';
 import looksJson from '../data/looks.json';
 import categoriesJson from '../data/categories.json';
 import stylesJson from '../data/styles.json';
+import couponsJson from '../data/coupons.json';
 
 export type CategorySlug =
-  | 't-shirts' | 'shoes' | 'jackets' | 'jeans' | 'accessories' | 'shorts';
+  | 't-shirts' | 'shoes' | 'jackets' | 'trousers' | 'jeans' | 'accessories' | 'shorts';
 
 export type StyleSlug =
   | 'smart-casual' | 'quiet-luxury' | 'streetwear' | 'summer' | 'tailoring';
@@ -27,15 +28,29 @@ export interface Look {
   heroImage: string;
   description?: string;
   productIds: string[];
+  addedAt: string;
 }
 
 export interface Category { slug: CategorySlug; label: string; image: string; }
 export interface Style    { slug: StyleSlug;    label: string; }
 
+export interface Coupon {
+  code?: string;
+  retailer: string;
+  label: string;
+  description: string;
+  url: string;
+  expires: string | null;
+  logo?: string;
+}
+
 export const products: Product[]     = productsJson as Product[];
-export const looks: Look[]           = looksJson as Look[];
+export const looks: Look[]           = (looksJson as Look[])
+  .slice()
+  .sort((a, b) => Date.parse(b.addedAt) - Date.parse(a.addedAt));
 export const categories: Category[]  = categoriesJson as Category[];
 export const styles: Style[]         = stylesJson as Style[];
+export const coupons: Coupon[]       = couponsJson as Coupon[];
 
 // Build-time integrity check: every productId in every look must resolve.
 const productIds = new Set(products.map(p => p.id));
@@ -79,3 +94,11 @@ export const categoryBySlug = (slug: string): Category | undefined =>
 
 export const styleBySlug = (slug: string): Style | undefined =>
   styles.find(s => s.slug === slug);
+
+const isCouponLive = (c: Coupon, now = Date.now()): boolean =>
+  !c.expires || Date.parse(c.expires) >= now;
+
+export const activeCoupons = (): Coupon[] => coupons.filter(c => isCouponLive(c));
+
+export const couponsForRetailer = (retailer: string): Coupon[] =>
+  activeCoupons().filter(c => c.retailer.toLowerCase() === retailer.toLowerCase());

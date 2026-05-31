@@ -2,50 +2,43 @@
 import Base from '../layouts/Base.astro';
 import ProductCard from '../components/ProductCard.astro';
 import LookCard from '../components/LookCard.astro';
-import { newReleases, looks, categories } from '../lib/data';
+import CouponCard from '../components/CouponCard.astro';
+import { newReleases, looks, categories, activeCoupons } from '../lib/data';
 
 const featuredLooks = looks.slice(0, 4);
 const newDrops      = newReleases(10);
+const topCoupons    = activeCoupons().slice(0, 2);
+const issueNumber   = String(Math.max(1, Math.floor((Date.now() - Date.parse('2026-01-01')) / (7 * 24 * 60 * 60 * 1000)))).padStart(2, '0');
 ---
 <Base>
-  {/* HERO — big bold serif statement + search */}
-  <section class="page-max page-pad pt-10 sm:pt-16 pb-10">
-    <p class="label">A curated edit by Malik</p>
-    <h1 class="mt-4 font-serif text-[44px] sm:text-[72px] lg:text-[88px] leading-[0.95] text-ink tracking-[-0.01em]">
-      Shop the fit.<br/>
-      <span class="text-ink-muted">Built for taste.</span>
+  {/* HERO — editorial statement */}
+  <section class="page-max page-pad pt-14 sm:pt-24 pb-16 sm:pb-24">
+    <div class="flex items-center gap-3 text-ink-soft">
+      <span class="font-sans uppercase tracking-[0.18em] text-[10.5px] font-medium">Issue {issueNumber}</span>
+      <span aria-hidden="true" class="block w-8 h-px bg-hairline"></span>
+      <span class="font-sans uppercase tracking-[0.18em] text-[10.5px] font-medium">A curated edit by Malik</span>
+    </div>
+    <h1 class="mt-7 font-serif font-light text-[52px] sm:text-[88px] lg:text-[108px] leading-[0.92] text-ink tracking-[-0.025em]">
+      Shop the fit.
     </h1>
-    <p class="mt-6 max-w-xl text-ink-muted text-[15px] sm:text-[17px] leading-relaxed">
-      Curated outfits and pieces — refreshed weekly. Tap any look to shop the exact items.
+    <p class="mt-6 max-w-xl text-ink-muted text-[16px] sm:text-[17px] leading-[1.6]">
+      A weekly edit of menswear — curated, not stocked. Every look links straight through to the piece, from the brands worth wearing.
     </p>
 
-    <form action="/search" method="get" class="mt-8 max-w-xl">
-      <label class="flex items-center gap-3 h-14 pl-6 pr-2 rounded-full bg-surface border border-hairline focus-within:border-ink/40 transition-colors">
-        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true" class="shrink-0 text-ink-muted">
-          <circle cx="9" cy="9" r="6" stroke="currentColor" stroke-width="1.4"/>
-          <path d="m18 18-4.5-4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
-        </svg>
-        <input
-          type="search"
-          name="q"
-          placeholder="Search outfits, brands, pieces…"
-          class="flex-1 min-w-0 h-full bg-transparent border-0 outline-none text-[15px] text-ink placeholder:text-ink-soft"
-        />
-        <button type="submit" class="w-11 h-11 rounded-full bg-ink text-bg inline-flex items-center justify-center transition-opacity hover:opacity-90" aria-label="Search">
-          <svg width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-            <path d="M4 10h12m0 0-4-4m4 4-4 4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </button>
-      </label>
-    </form>
+    <div class="mt-10 flex flex-wrap gap-3">
+      <a href="/outfits" class="btn-primary">Browse this week's looks</a>
+      <a href="/catalog" class="btn-secondary">The full catalog</a>
+    </div>
   </section>
 
-  {/* CATEGORY CIRCLES */}
-  <section class="page-max page-pad pb-12">
-    <div class="flex gap-5 sm:gap-8 overflow-x-auto -mx-5 px-5 sm:-mx-10 sm:px-10 lg:-mx-20 lg:px-20 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+  <div class="page-max page-pad"><hr class="border-t border-hairline" /></div>
+
+  {/* CATEGORY ROW — discreet */}
+  <section class="page-max page-pad py-10 sm:py-14">
+    <div class="flex gap-6 sm:gap-10 overflow-x-auto -mx-5 px-5 sm:-mx-10 sm:px-10 lg:-mx-20 lg:px-20 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
       <a href="/catalog" class="cat-circle group">
         <div class="ring flex items-center justify-center">
-          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" aria-hidden="true" class="text-ink-muted">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" aria-hidden="true" class="text-ink-muted">
             <rect x="4" y="4" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.4"/>
             <rect x="13" y="4" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.4"/>
             <rect x="4" y="13" width="7" height="7" rx="1" stroke="currentColor" stroke-width="1.4"/>
@@ -65,29 +58,33 @@ const newDrops      = newReleases(10);
     </div>
   </section>
 
-  {/* FEATURED LOOKS — the "shop the fit" hero section */}
-  <section class="page-max page-pad pb-20 sm:pb-28">
-    <div class="flex items-end justify-between gap-4 mb-8 sm:mb-12">
+  <div class="page-max page-pad"><hr class="border-t border-hairline" /></div>
+
+  {/* FEATURED LOOKS — the edit */}
+  <section class="page-max page-pad py-16 sm:py-24">
+    <header class="flex items-end justify-between gap-6 mb-10 sm:mb-14">
       <div>
-        <p class="label mb-3">This week's edit</p>
-        <h2 class="font-serif text-[32px] sm:text-[44px] leading-[1.02] text-ink tracking-[-0.01em]">Get the fit.</h2>
+        <p class="font-sans uppercase tracking-[0.18em] text-[10.5px] font-medium text-ink-soft">The edit · {featuredLooks.length} looks</p>
+        <h2 class="mt-3 font-serif font-light text-[34px] sm:text-[52px] leading-[1.02] text-ink tracking-[-0.02em]">This week.</h2>
       </div>
-      <a href="/outfits" class="btn-secondary">All looks</a>
-    </div>
-    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
+      <a href="/outfits" class="btn-text">All looks →</a>
+    </header>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-x-3 gap-y-10 sm:gap-x-5 sm:gap-y-14">
       {featuredLooks.map(l => <LookCard look={l} />)}
     </div>
   </section>
 
-  {/* NEW RELEASES — horizontal scroll */}
-  <section class="pb-20 sm:pb-28">
-    <div class="page-max page-pad flex items-end justify-between gap-4 mb-8">
+  <div class="page-max page-pad"><hr class="border-t border-hairline" /></div>
+
+  {/* NEW RELEASES */}
+  <section class="py-16 sm:py-24">
+    <header class="page-max page-pad flex items-end justify-between gap-6 mb-10">
       <div>
-        <p class="label mb-3">New releases</p>
-        <h2 class="font-serif text-[32px] sm:text-[44px] leading-[1.02] text-ink tracking-[-0.01em]">Fresh drops.</h2>
+        <p class="font-sans uppercase tracking-[0.18em] text-[10.5px] font-medium text-ink-soft">New in</p>
+        <h2 class="mt-3 font-serif font-light text-[34px] sm:text-[52px] leading-[1.02] text-ink tracking-[-0.02em]">Fresh pieces.</h2>
       </div>
-      <a href="/catalog" class="btn-secondary">Show all</a>
-    </div>
+      <a href="/catalog" class="btn-text">Show all →</a>
+    </header>
     <div class="page-max">
       <div class="scroll-x">
         {newDrops.map(p => <ProductCard product={p} widthClass="w-[62%] sm:w-[32%] lg:w-[22%]" />)}
@@ -95,15 +92,55 @@ const newDrops      = newReleases(10);
     </div>
   </section>
 
-  {/* EDITORIAL — quiet luxury closing */}
-  <section class="page-max page-pad pb-24 sm:pb-32">
-    <div class="rounded-3xl bg-surface border border-hairline p-10 sm:p-16 text-center">
-      <p class="label mb-5">Meet Malik</p>
-      <p class="font-serif text-[24px] sm:text-[34px] leading-[1.15] text-ink tracking-[-0.01em] max-w-2xl mx-auto">
-        Curated weekly. Built for taste — without the noise.
+  {activeCoupons().length > 0 && (
+    <>
+      <div class="page-max page-pad"><hr class="border-t border-hairline" /></div>
+      <section class="page-max page-pad py-16 sm:py-24">
+        <header class="flex items-end justify-between gap-6 mb-10">
+          <div>
+            <p class="font-sans uppercase tracking-[0.18em] text-[10.5px] font-medium text-ink-soft">Discounts · live now</p>
+            <h2 class="mt-3 font-serif font-light text-[34px] sm:text-[52px] leading-[1.02] text-ink tracking-[-0.02em]">Brands on sale.</h2>
+          </div>
+          <a href="/coupons" class="btn-text">All discounts →</a>
+        </header>
+
+        {/* Brand bar — strip of logos that are currently discounted */}
+        <div class="flex gap-3 sm:gap-4 overflow-x-auto mb-8 sm:mb-10 -mx-5 px-5 sm:-mx-10 sm:px-10 lg:-mx-20 lg:px-20 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+          {activeCoupons().map(c => (
+            <a
+              href="/coupons"
+              class="shrink-0 inline-flex items-center gap-3 h-14 pl-3 pr-5 rounded-full bg-surface border border-hairline hover:border-ink/40 transition-colors"
+              aria-label={`${c.retailer} — ${c.label}`}
+            >
+              {c.logo && (
+                <img src={c.logo} alt="" width="40" height="40" class="w-10 h-10 rounded-full object-cover bg-bg border border-hairline" />
+              )}
+              <span class="flex flex-col leading-tight">
+                <span class="font-sans text-[13px] text-ink font-medium">{c.retailer}</span>
+                <span class="font-sans uppercase text-[10px] text-ink-soft font-medium" style="letter-spacing:0.14em">{c.label.replace(/\.$/, '')}</span>
+              </span>
+            </a>
+          ))}
+        </div>
+
+        <div class="grid gap-4 sm:gap-5 sm:grid-cols-2">
+          {topCoupons.map(c => <CouponCard coupon={c} compact={true} />)}
+        </div>
+      </section>
+    </>
+  )}
+
+  <div class="page-max page-pad"><hr class="border-t border-hairline" /></div>
+
+  {/* EDITORIAL — closing note */}
+  <section class="page-max page-pad py-20 sm:py-32">
+    <div class="max-w-2xl mx-auto text-center">
+      <p class="font-sans uppercase tracking-[0.18em] text-[10.5px] font-medium text-ink-soft">A note from Malik</p>
+      <p class="mt-6 font-serif font-light text-[26px] sm:text-[36px] leading-[1.2] text-ink tracking-[-0.015em]">
+        I don't stock anything. I just wear it, then I tell you where it's from.
       </p>
-      <div class="mt-8 flex justify-center">
-        <a href="/about" class="btn-secondary">Read more</a>
+      <div class="mt-10">
+        <a href="/about" class="btn-text">More about the edit →</a>
       </div>
     </div>
   </section>

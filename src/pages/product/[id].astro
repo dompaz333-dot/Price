@@ -4,8 +4,10 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
 import ProductCard from '../../components/ProductCard.astro';
 import LookCard from '../../components/LookCard.astro';
 import SectionHeader from '../../components/SectionHeader.astro';
+import CouponCard from '../../components/CouponCard.astro';
 import {
-  products, productById, categoryBySlug, relatedProducts, looksContainingProduct, formatPrice
+  products, productById, categoryBySlug, relatedProducts, looksContainingProduct,
+  couponsForRetailer, formatPrice,
 } from '../../lib/data';
 
 export function getStaticPaths() {
@@ -16,9 +18,10 @@ const { id } = Astro.params;
 const product = productById(id!);
 if (!product) throw new Error(`Unknown product: ${id}`);
 
-const cat       = categoryBySlug(product.category)!;
-const related   = relatedProducts(product, 6);
-const inLooks   = looksContainingProduct(product.id);
+const cat        = categoryBySlug(product.category)!;
+const related    = relatedProducts(product, 6);
+const inLooks    = looksContainingProduct(product.id);
+const retCoupons = couponsForRetailer(product.retailer);
 ---
 <Base
   title={`${product.name} — MalikFits`}
@@ -35,7 +38,7 @@ const inLooks   = looksContainingProduct(product.id);
   <section class="page-max page-pad mt-6 grid gap-8 lg:grid-cols-[1.1fr_1fr] lg:gap-12">
     <div class="card-img !aspect-[4/5] lg:sticky lg:top-20 lg:self-start">
       <img src={product.image} alt={product.name} width="800" height="1000" fetchpriority="high" />
-      {product.isNew && <span class="badge-new">New</span>}
+      {product.isNew && <span class="badge-new">New in</span>}
       <button
         type="button"
         class="heart-chip"
@@ -67,6 +70,15 @@ const inLooks   = looksContainingProduct(product.id);
         </a>
         <p class="mt-2 text-xs text-ink-muted">Affiliate link · opens in a new tab</p>
       </div>
+
+      {retCoupons.length > 0 && (
+        <div class="mt-10">
+          <p class="label mb-3">Save at {product.retailer}</p>
+          <div class="grid gap-3">
+            {retCoupons.map(c => <CouponCard coupon={c} compact={true} />)}
+          </div>
+        </div>
+      )}
 
       {inLooks.length > 0 && (
         <div class="mt-12">

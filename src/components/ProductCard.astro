@@ -9,7 +9,7 @@ const { product, widthClass = 'w-full' } = Astro.props as Props;
   <a href={`/product/${product.id}`} class="block">
     <div class="card-img">
       <img src={product.image} alt={product.name} loading="lazy" width="800" height="1000" />
-      {product.isNew && <span class="badge-new">New</span>}
+      {product.isNew && <span class="badge-new">New in</span>}
       <button
         type="button"
         class="heart-chip"
@@ -23,10 +23,12 @@ const { product, widthClass = 'w-full' } = Astro.props as Props;
         </svg>
       </button>
     </div>
-    <div class="mt-4 flex items-baseline justify-between gap-3">
-      <h3 class="font-serif text-[17px] text-ink leading-tight truncate">{product.name}</h3>
-      <p class="text-sm text-ink-muted tabular-nums shrink-0">{formatPrice(product.price)}</p>
+    <div class="mt-4">
+      <p class="font-sans uppercase tracking-[0.14em] text-[10.5px] text-ink-soft font-medium">{product.retailer}</p>
+      <div class="mt-1.5 flex items-baseline justify-between gap-3">
+        <h3 class="font-serif text-[16px] sm:text-[17px] text-ink leading-tight tracking-[-0.005em] truncate">{product.name}</h3>
+        <p class="text-[13px] text-ink tabular-nums shrink-0">{formatPrice(product.price)}</p>
+      </div>
     </div>
-    <p class="mt-1.5 label">via {product.retailer}</p>
   </a>
 </article>

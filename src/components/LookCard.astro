@@ -9,12 +9,11 @@ const style = styleBySlug(look.style);
 <article class={`${widthClass} group`}>
   <a href={`/outfits/${look.id}`} class="block">
     <div class="relative block w-full aspect-[3/4] overflow-hidden rounded-2xl bg-surface-2">
-      <img src={look.heroImage} alt={look.title} loading="lazy" width="900" height="1200" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]" />
-      {style && <span class="absolute top-3 left-3 inline-flex items-center h-7 px-3 rounded-full bg-bg/90 backdrop-blur-sm uppercase tracking-label text-[10px] text-ink font-medium">{style.label}</span>}
+      <img src={look.heroImage} alt={look.title} loading="lazy" width="900" height="1200" class="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.03]" />
     </div>
-    <div class="mt-4">
-      <h3 class="font-serif text-[20px] sm:text-[22px] text-ink leading-tight tracking-[-0.005em]">{look.title}</h3>
-      <p class="mt-1.5 label">Shop the fit →</p>
+    <div class="mt-5">
+      {style && <p class="font-sans uppercase tracking-[0.14em] text-[10.5px] text-ink-soft font-medium">{style.label}</p>}
+      <h3 class="mt-1.5 font-serif text-[20px] sm:text-[22px] text-ink leading-[1.1] tracking-[-0.005em]">{look.title}</h3>
     </div>
   </a>
 </article>
