@@ -5,6 +5,7 @@
     "style": "quiet-luxury",
     "heroImage": "/images/looks/placeholder.svg",
     "description": "Soft tailoring for a slow morning.",
+    "addedAt": "2026-05-25",
     "productIds": [
       "jacket-camel-overcoat-001",
       "tshirt-cream-boxy-001",
@@ -19,6 +20,7 @@
     "style": "smart-casual",
     "heroImage": "/images/looks/placeholder.svg",
     "description": "Unstructured tailoring with quiet edges.",
+    "addedAt": "2026-05-18",
     "productIds": [
       "jacket-stone-blazer-003",
       "tshirt-white-essential-003",
@@ -33,6 +35,7 @@
     "style": "quiet-luxury",
     "heroImage": "/images/looks/placeholder.svg",
     "description": "Tonal layering, zero noise.",
+    "addedAt": "2026-05-11",
     "productIds": [
       "jacket-cream-bomber-002",
       "tshirt-sand-pocket-004",
@@ -46,6 +49,7 @@
     "style": "streetwear",
     "heroImage": "/images/looks/placeholder.svg",
     "description": "Heavyweight basics with weight on the foot.",
+    "addedAt": "2026-05-04",
     "productIds": [
       "tshirt-charcoal-heavy-002",
       "jacket-grey-shacket-007",
@@ -60,6 +64,7 @@
     "style": "streetwear",
     "heroImage": "/images/looks/placeholder.svg",
     "description": "Honest denim, honest sneakers.",
+    "addedAt": "2026-04-27",
     "productIds": [
       "tshirt-navy-stripe-006",
       "jacket-navy-harrington-006",
@@ -73,6 +78,7 @@
     "style": "summer",
     "heroImage": "/images/looks/placeholder.svg",
     "description": "Built for warm wind and cold drinks.",
+    "addedAt": "2026-04-20",
     "productIds": [
       "tshirt-stone-linen-007",
       "shorts-cream-linen-001",
@@ -86,6 +92,7 @@
     "style": "summer",
     "heroImage": "/images/looks/placeholder.svg",
     "description": "Tailored from the waist up, easy from the waist down.",
+    "addedAt": "2026-04-13",
     "productIds": [
       "tshirt-white-essential-003",
       "shorts-stone-pleated-003",
@@ -99,6 +106,7 @@
     "style": "tailoring",
     "heroImage": "/images/looks/placeholder.svg",
     "description": "Classic shapes, modern proportions.",
+    "addedAt": "2026-04-06",
     "productIds": [
       "jacket-stone-blazer-003",
       "tshirt-charcoal-heavy-002",
@@ -113,6 +121,7 @@
     "style": "smart-casual",
     "heroImage": "/images/looks/placeholder.svg",
     "description": "A workwear coat does most of the talking.",
+    "addedAt": "2026-03-30",
     "productIds": [
       "jacket-olive-chore-005",
       "tshirt-olive-ribbed-005",
@@ -127,6 +136,7 @@
     "style": "tailoring",
     "heroImage": "/images/looks/placeholder.svg",
     "description": "Sharp lines, low gloss.",
+    "addedAt": "2026-03-23",
     "productIds": [
       "jacket-black-leather-004",
       "tshirt-charcoal-heavy-002",

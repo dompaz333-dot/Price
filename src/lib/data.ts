@@ -28,6 +28,7 @@ export interface Look {
   heroImage: string;
   description?: string;
   productIds: string[];
+  addedAt: string;
 }
 
 export interface Category { slug: CategorySlug; label: string; image: string; }
@@ -43,7 +44,9 @@ export interface Coupon {
 }
 
 export const products: Product[]     = productsJson as Product[];
-export const looks: Look[]           = looksJson as Look[];
+export const looks: Look[]           = (looksJson as Look[])
+  .slice()
+  .sort((a, b) => Date.parse(b.addedAt) - Date.parse(a.addedAt));
 export const categories: Category[]  = categoriesJson as Category[];
 export const styles: Style[]         = stylesJson as Style[];
 export const coupons: Coupon[]       = couponsJson as Coupon[];
