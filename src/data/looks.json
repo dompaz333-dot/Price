@@ -1,5 +1,19 @@
 [
   {
+    "id": "crossbody-grey-chino",
+    "title": "Crossbody & Grey Chino",
+    "style": "smart-casual",
+    "heroImage": "/images/looks/crossbody-grey-chino.jpg",
+    "description": "Crisp white tee, mid-grey chino, heritage runner, leather crossbody. The everyday smart-casual stack.",
+    "addedAt": "2026-05-31",
+    "productIds": [
+      "everlane-essential-tee-white",
+      "everlane-performance-chino",
+      "nb-990v6-grey",
+      "mk-hudson-camera-bag"
+    ]
+  },
+  {
     "id": "camel-coat-sunday",
     "title": "Camel Coat Sunday",
     "style": "quiet-luxury",

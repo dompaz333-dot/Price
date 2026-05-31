@@ -5,7 +5,7 @@ import stylesJson from '../data/styles.json';
 import couponsJson from '../data/coupons.json';
 
 export type CategorySlug =
-  | 't-shirts' | 'shoes' | 'jackets' | 'jeans' | 'accessories' | 'shorts';
+  | 't-shirts' | 'shoes' | 'jackets' | 'trousers' | 'jeans' | 'accessories' | 'shorts';
 
 export type StyleSlug =
   | 'smart-casual' | 'quiet-luxury' | 'streetwear' | 'summer' | 'tailoring';
