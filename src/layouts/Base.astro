@@ -1,0 +1,93 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  canonical?: string;
+}
+
+const {
+  title = 'MalikFits — Modern men\'s style, ready to shop.',
+  description = 'Curated men\'s outfits and pieces. Smart casual, quiet luxury, streetwear, summer, tailoring. Tap any look to shop the pieces.',
+  ogImage = '/og-default.svg',
+  canonical,
+} = Astro.props as Props;
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
+const canonicalUrl = canonical ?? siteUrl + Astro.url.pathname;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+    <meta name="theme-color" content="#F7F4EE" />
+    <meta name="color-scheme" content="light" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  </head>
+  <body class="min-h-dvh flex flex-col">
+    <Header />
+    <main class="flex-1">
+      <slot />
+    </main>
+    <Footer />
+
+    <script>
+      // Wishlist + heart-toggle hydration, shared site-wide.
+      const KEY = 'malikfits.wishlist.v1';
+      const read = (): string[] => {
+        try { return JSON.parse(localStorage.getItem(KEY) || '[]'); }
+        catch { return []; }
+      };
+      const write = (ids: string[]) => localStorage.setItem(KEY, JSON.stringify(ids));
+      const has = (id: string) => read().includes(id);
+      const toggle = (id: string) => {
+        const ids = read();
+        const i = ids.indexOf(id);
+        if (i >= 0) ids.splice(i, 1); else ids.push(id);
+        write(ids);
+        return ids.includes(id);
+      };
+
+      const syncHearts = () => {
+        document.querySelectorAll<HTMLButtonElement>('[data-wishlist-id]').forEach(btn => {
+          const id = btn.dataset.wishlistId!;
+          btn.dataset.saved = String(has(id));
+          btn.setAttribute('aria-pressed', String(has(id)));
+        });
+        const count = read().length;
+        document.querySelectorAll<HTMLElement>('[data-wishlist-count]').forEach(el => {
+          el.textContent = count > 0 ? String(count) : '';
+          el.style.display = count > 0 ? '' : 'none';
+        });
+      };
+
+      document.addEventListener('click', (e) => {
+        const t = e.target as HTMLElement;
+        const btn = t.closest<HTMLButtonElement>('[data-wishlist-id]');
+        if (!btn) return;
+        e.preventDefault();
+        const id = btn.dataset.wishlistId!;
+        const saved = toggle(id);
+        btn.dataset.saved = String(saved);
+        btn.setAttribute('aria-pressed', String(saved));
+        syncHearts();
+      });
+
+      syncHearts();
+    </script>
+  </body>
+</html>

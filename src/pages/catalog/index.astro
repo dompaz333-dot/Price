@@ -1,0 +1,32 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { products, categories } from '../../lib/data';
+
+const sorted = [...products].sort((a, b) =>
+  (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0) || a.name.localeCompare(b.name)
+);
+---
+<Base title="All Products — MalikFits"
+      description="Every piece in the MalikFits catalog: t-shirts, shoes, jackets, jeans, accessories, shorts.">
+  <Breadcrumb items={[{ href: '/', label: 'Home' }, { label: 'All Products' }]} />
+
+  <div class="page-max page-pad mt-6 mb-10 flex items-end justify-between gap-4">
+    <h1 class="font-serif text-[32px] sm:text-[40px] text-ink leading-tight">All Products</h1>
+    <p class="text-sm text-ink-muted hidden sm:block">{sorted.length} pieces</p>
+  </div>
+
+  <div class="page-max page-pad scroll-x mb-8">
+    <a href="/catalog" class="chip chip-active">All</a>
+    {categories.map(c => (
+      <a href={`/catalog/${c.slug}`} class="chip">{c.label}</a>
+    ))}
+  </div>
+
+  <section class="page-max page-pad">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
+      {sorted.map(p => <ProductCard product={p} />)}
+    </div>
+  </section>
+</Base>

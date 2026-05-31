@@ -1,0 +1,38 @@
+---
+import { categories } from '../lib/data';
+const year = new Date().getFullYear();
+---
+<footer class="hairline mt-24 bg-bg">
+  <div class="page-max page-pad py-16 grid gap-10 sm:grid-cols-3">
+    <div>
+      <p class="font-serif text-[22px] tracking-[0.04em] text-ink leading-none">MalikFits</p>
+      <p class="mt-3 text-ink-muted text-sm max-w-xs">
+        Curated men's outfits and pieces. Tap any look to shop the fit.
+      </p>
+    </div>
+    <div>
+      <p class="label mb-3">Shop</p>
+      <ul class="space-y-2 text-sm">
+        <li><a class="text-ink hover:text-accent" href="/catalog">All Products</a></li>
+        {categories.map(c => (
+          <li><a class="text-ink hover:text-accent" href={`/catalog/${c.slug}`}>{c.label}</a></li>
+        ))}
+      </ul>
+    </div>
+    <div>
+      <p class="label mb-3">Looks &amp; More</p>
+      <ul class="space-y-2 text-sm">
+        <li><a class="text-ink hover:text-accent" href="/outfits">All Looks</a></li>
+        <li><a class="text-ink hover:text-accent" href="/wishlist">Wishlist</a></li>
+        <li><a class="text-ink hover:text-accent" href="/search">Search</a></li>
+        <li><a class="text-ink hover:text-accent" href="/about">About Malik</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="hairline">
+    <div class="page-max page-pad py-6 flex flex-col sm:flex-row gap-2 sm:items-center sm:justify-between text-xs text-ink-muted">
+      <p>Contains affiliate links · Some images are AI-generated.</p>
+      <p>© {year} MalikFits</p>
+    </div>
+  </div>
+</footer>

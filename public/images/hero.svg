@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1500" role="img" aria-label="Hero placeholder">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#F2EEE3"/>
+      <stop offset="100%" stop-color="#E8E1D0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="1500" fill="url(#g)"/>
+  <g transform="translate(600 720)" fill="none" stroke="#B5AC95" stroke-width="2">
+    <circle cx="0" cy="-140" r="64"/>
+    <path d="M-120 0 Q0 -120 120 0 L100 320 L-100 320 Z"/>
+    <line x1="-60" y1="320" x2="-80" y2="560"/>
+    <line x1="60"  y1="320" x2="80"  y2="560"/>
+  </g>
+  <text x="600" y="1280" font-family="Fraunces,Georgia,serif" font-size="36" font-style="italic"
+        text-anchor="middle" fill="#6B655B">Hero photo of Malik</text>
+  <text x="600" y="1322" font-family="Inter,system-ui,sans-serif" font-size="14"
+        text-anchor="middle" fill="#9C957F">Replace at /public/images/hero.svg</text>
+</svg>

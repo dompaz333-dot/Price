@@ -1,0 +1,90 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import LookCard from '../../components/LookCard.astro';
+import SectionHeader from '../../components/SectionHeader.astro';
+import {
+  products, productById, categoryBySlug, relatedProducts, looksContainingProduct, formatPrice
+} from '../../lib/data';
+
+export function getStaticPaths() {
+  return products.map(p => ({ params: { id: p.id } }));
+}
+
+const { id } = Astro.params;
+const product = productById(id!);
+if (!product) throw new Error(`Unknown product: ${id}`);
+
+const cat       = categoryBySlug(product.category)!;
+const related   = relatedProducts(product, 6);
+const inLooks   = looksContainingProduct(product.id);
+---
+<Base
+  title={`${product.name} — MalikFits`}
+  description={`${product.name} from ${product.retailer}. ${formatPrice(product.price)}. Shop now via MalikFits.`}
+  ogImage={product.image}
+>
+  <Breadcrumb items={[
+    { href: '/', label: 'Home' },
+    { href: '/catalog', label: 'Catalog' },
+    { href: `/catalog/${cat.slug}`, label: cat.label },
+    { label: product.name }
+  ]} />
+
+  <section class="page-max page-pad mt-6 grid gap-8 lg:grid-cols-[1.1fr_1fr] lg:gap-12">
+    <div class="card-img !aspect-[4/5] lg:sticky lg:top-20 lg:self-start">
+      <img src={product.image} alt={product.name} width="800" height="1000" fetchpriority="high" />
+      {product.isNew && <span class="badge-new">New</span>}
+      <button
+        type="button"
+        class="heart-chip"
+        data-wishlist-id={product.id}
+        aria-pressed="false"
+        aria-label={`Save ${product.name} to wishlist`}
+      >
+        <svg width="14" height="14" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+          <path d="M10 17s-6-3.5-6-8a3.5 3.5 0 0 1 6-2.45A3.5 3.5 0 0 1 16 9c0 4.5-6 8-6 8Z"
+            stroke="currentColor" stroke-width="1.4" fill="currentColor" fill-opacity="0"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="flex flex-col">
+      <p class="label mb-3">{cat.label}</p>
+      <h1 class="font-serif text-[32px] sm:text-[44px] text-ink leading-tight">{product.name}</h1>
+      <p class="mt-4 text-[22px] text-ink tabular-nums">{formatPrice(product.price)}</p>
+      <p class="mt-2 text-sm text-ink-muted">From {product.retailer}</p>
+
+      <div class="mt-8">
+        <a
+          href={product.affiliateUrl}
+          target="_blank"
+          rel="noopener sponsored nofollow"
+          class="btn-primary w-full"
+        >
+          Shop at {product.retailer} →
+        </a>
+        <p class="mt-2 text-xs text-ink-muted">Affiliate link · opens in a new tab</p>
+      </div>
+
+      {inLooks.length > 0 && (
+        <div class="mt-12">
+          <p class="label mb-3">Seen in</p>
+          <div class="grid grid-cols-2 gap-3">
+            {inLooks.slice(0, 4).map(l => <LookCard look={l} />)}
+          </div>
+        </div>
+      )}
+    </div>
+  </section>
+
+  {related.length > 0 && (
+    <section class="page-max page-pad section-y">
+      <SectionHeader label="More like this" title="You might also like." href={`/catalog/${cat.slug}`} hrefLabel={`All ${cat.label}`} />
+      <div class="scroll-x">
+        {related.map(p => <ProductCard product={p} widthClass="w-[62%] sm:w-[32%] lg:w-[22%]" />)}
+      </div>
+    </section>
+  )}
+</Base>

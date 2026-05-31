@@ -1,0 +1,7 @@
+[
+  { "slug": "smart-casual",  "label": "Smart Casual" },
+  { "slug": "quiet-luxury",  "label": "Quiet Luxury" },
+  { "slug": "streetwear",    "label": "Streetwear" },
+  { "slug": "summer",        "label": "Summer" },
+  { "slug": "tailoring",     "label": "Tailoring" }
+]
