@@ -4,12 +4,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        bg: '#F7F4EE',
-        surface: '#FDFBF7',
-        ink: '#1A1714',
+        bg: '#F4F1EA',
+        surface: '#FBF8F2',
+        'surface-2': '#EDE7DB',
+        ink: '#16130F',
         'ink-muted': '#6B655B',
-        hairline: '#E5DFD3',
-        accent: '#B88A5C',
+        'ink-soft': '#9A9489',
+        hairline: '#E2DBCB',
+        accent: '#8A6A3F',
       },
       fontFamily: {
         serif: ['"Fraunces Variable"', 'Georgia', 'serif'],

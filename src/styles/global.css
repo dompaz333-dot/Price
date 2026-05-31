@@ -32,52 +32,61 @@
 @layer components {
   .page-pad   { @apply px-5 sm:px-10 lg:px-20; }
   .page-max   { @apply mx-auto max-w-page; }
-  .section-y  { @apply py-16 sm:py-24; }
+  .section-y  { @apply py-20 sm:py-28; }
   .hairline   { @apply border-t border-hairline; }
 
   .label {
-    @apply font-sans uppercase tracking-label text-[12px] font-medium text-ink-muted;
+    @apply font-sans uppercase tracking-label text-[11px] font-medium text-ink-muted;
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center
-           h-12 px-6 w-full sm:w-auto
-           bg-ink text-bg
-           font-medium uppercase tracking-button text-[13px]
+    @apply inline-flex items-center justify-center gap-2
+           h-12 px-7 w-full sm:w-auto
+           bg-ink text-bg rounded-full
+           font-medium uppercase tracking-button text-[12px]
            transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink;
   }
   .btn-secondary {
-    @apply inline-flex items-center justify-center
-           h-9 px-4
+    @apply inline-flex items-center justify-center gap-2
+           h-11 px-5 rounded-full
            border border-ink text-ink bg-transparent
-           font-medium uppercase tracking-button text-[12px]
+           font-medium uppercase tracking-button text-[11px]
            transition-colors hover:bg-ink hover:text-bg;
   }
   .btn-text {
     @apply inline-flex items-center gap-1
-           font-medium uppercase tracking-button text-[12px] text-ink
-           underline decoration-hairline underline-offset-4
-           transition-colors hover:decoration-accent;
+           font-medium uppercase tracking-button text-[11px] text-ink
+           transition-colors hover:text-accent;
+  }
+
+  .pill {
+    @apply inline-flex items-center justify-center
+           h-11 px-4 rounded-full
+           bg-surface border border-hairline text-ink
+           transition-colors hover:border-ink/40;
+  }
+  .pill-icon {
+    @apply pill w-11 px-0;
   }
 
   .chip {
-    @apply inline-flex items-center h-9 px-4
+    @apply inline-flex items-center h-9 px-4 rounded-full
            border border-hairline text-ink-muted bg-surface
-           uppercase tracking-button text-[12px]
+           uppercase tracking-button text-[11px]
            transition-colors hover:border-ink hover:text-ink whitespace-nowrap;
   }
   .chip-active {
-    @apply border-ink text-ink bg-ink/[0.04];
+    @apply border-ink text-ink bg-ink text-bg;
   }
 
   .card-img {
-    @apply relative block w-full aspect-[4/5] overflow-hidden bg-surface border border-hairline;
+    @apply relative block w-full aspect-[4/5] overflow-hidden bg-surface-2 rounded-2xl;
   }
   .card-img img, .card-img svg { @apply w-full h-full object-cover; }
 
   .badge-new {
-    @apply absolute top-2 left-2 inline-flex items-center gap-1.5
-           h-6 px-2 bg-bg/95 border border-hairline
+    @apply absolute top-3 left-3 inline-flex items-center gap-1.5
+           h-6 px-2.5 rounded-full bg-bg/90 backdrop-blur-sm
            uppercase tracking-label text-[10px] text-ink font-medium;
   }
   .badge-new::before {
@@ -86,8 +95,8 @@
   }
 
   .heart-chip {
-    @apply absolute top-2 right-2 inline-flex items-center justify-center
-           w-8 h-8 bg-bg/95 border border-hairline text-ink
+    @apply absolute top-3 right-3 inline-flex items-center justify-center
+           w-9 h-9 rounded-full bg-bg/90 backdrop-blur-sm text-ink
            transition-colors hover:text-accent;
   }
   .heart-chip[data-saved="true"] { @apply text-accent; }
@@ -101,7 +110,20 @@
   .scroll-x > * { @apply snap-start shrink-0; }
 
   .input {
-    @apply w-full h-12 px-4 bg-surface border border-hairline text-ink placeholder:text-ink-muted
-           focus:outline-none focus:border-ink;
+    @apply w-full h-12 px-5 rounded-full bg-surface border border-hairline text-ink placeholder:text-ink-soft
+           focus:outline-none focus:border-ink/40;
+  }
+
+  .cat-circle {
+    @apply flex flex-col items-center gap-2 shrink-0;
+  }
+  .cat-circle .ring {
+    @apply w-20 h-20 sm:w-24 sm:h-24 rounded-full overflow-hidden bg-surface-2 border border-hairline
+           transition-transform group-hover:scale-[1.03];
+  }
+  .cat-circle .ring img,
+  .cat-circle .ring svg { @apply w-full h-full object-cover; }
+  .cat-circle .name {
+    @apply font-sans text-[12px] tracking-label uppercase text-ink-muted;
   }
 }
