@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" role="img" aria-label="Under Armour">
+  <rect width="100" height="100" rx="14" fill="#FFFFFF"/>
+  <g fill="#16130F">
+    <path d="M30 35 Q22 50 30 65 L40 60 Q35 50 40 40 Z"/>
+    <path d="M70 35 Q78 50 70 65 L60 60 Q65 50 60 40 Z"/>
+    <ellipse cx="50" cy="50" rx="10" ry="3.5" fill="none" stroke="#16130F" stroke-width="2"/>
+  </g>
+  <text x="50" y="86" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-weight="900" font-size="10" fill="#16130F" letter-spacing="2">UA</text>
+</svg>
