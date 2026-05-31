@@ -2,10 +2,10 @@
 interface Props { label?: string; title: string; href?: string; hrefLabel?: string; }
 const { label, title, href, hrefLabel = 'Show all' } = Astro.props as Props;
 ---
-<div class="flex items-end justify-between gap-4 mb-6">
+<div class="flex items-end justify-between gap-6 mb-10">
   <div>
-    {label && <p class="label mb-2">{label}</p>}
-    <h2 class="font-serif text-[28px] sm:text-[32px] text-ink leading-tight">{title}</h2>
+    {label && <p class="label mb-3">{label}</p>}
+    <h2 class="font-serif font-light text-[30px] sm:text-[44px] leading-[1.02] text-ink tracking-[-0.02em]">{title}</h2>
   </div>
   {href && (
     <a href={href} class="btn-text shrink-0 pb-1">{hrefLabel} →</a>

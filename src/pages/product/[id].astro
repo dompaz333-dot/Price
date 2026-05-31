@@ -38,7 +38,7 @@ const retCoupons = couponsForRetailer(product.retailer);
   <section class="page-max page-pad mt-6 grid gap-8 lg:grid-cols-[1.1fr_1fr] lg:gap-12">
     <div class="card-img !aspect-[4/5] lg:sticky lg:top-20 lg:self-start">
       <img src={product.image} alt={product.name} width="800" height="1000" fetchpriority="high" />
-      {product.isNew && <span class="badge-new">New</span>}
+      {product.isNew && <span class="badge-new">New in</span>}
       <button
         type="button"
         class="heart-chip"

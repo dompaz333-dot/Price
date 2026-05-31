@@ -16,17 +16,18 @@
   body {
     @apply bg-bg text-ink font-sans antialiased;
     font-size: 16px;
-    line-height: 1.55;
+    line-height: 1.6;
+    font-feature-settings: 'ss01', 'ss02';
   }
   ::selection {
-    background: #1A1714;
-    color: #F7F4EE;
+    background: #16130F;
+    color: #F4F1EA;
   }
   a { color: inherit; text-decoration: none; }
   button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
   img, svg, video { display: block; max-width: 100%; height: auto; }
   hr { @apply border-0 border-t border-hairline; }
-  h1, h2, h3, h4 { @apply font-serif font-normal text-ink; line-height: 1.15; }
+  h1, h2, h3, h4 { @apply font-serif font-light text-ink; line-height: 1.1; letter-spacing: -0.015em; }
 }
 
 @layer components {
@@ -36,27 +37,31 @@
   .hairline   { @apply border-t border-hairline; }
 
   .label {
-    @apply font-sans uppercase tracking-label text-[11px] font-medium text-ink-muted;
+    @apply font-sans uppercase text-[10.5px] font-medium text-ink-soft;
+    letter-spacing: 0.18em;
   }
 
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2
            h-12 px-7 w-full sm:w-auto
            bg-ink text-bg rounded-full
-           font-medium uppercase tracking-button text-[12px]
+           font-medium uppercase text-[11px]
            transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink;
+    letter-spacing: 0.14em;
   }
   .btn-secondary {
     @apply inline-flex items-center justify-center gap-2
-           h-11 px-5 rounded-full
-           border border-ink text-ink bg-transparent
-           font-medium uppercase tracking-button text-[11px]
-           transition-colors hover:bg-ink hover:text-bg;
+           h-12 px-6 rounded-full
+           border border-ink/30 text-ink bg-transparent
+           font-medium uppercase text-[11px]
+           transition-colors hover:border-ink hover:bg-ink hover:text-bg;
+    letter-spacing: 0.14em;
   }
   .btn-text {
-    @apply inline-flex items-center gap-1
-           font-medium uppercase tracking-button text-[11px] text-ink
+    @apply inline-flex items-center gap-1.5
+           font-medium uppercase text-[10.5px] text-ink
            transition-colors hover:text-accent;
+    letter-spacing: 0.18em;
   }
 
   .pill {
@@ -85,13 +90,10 @@
   .card-img img, .card-img svg { @apply w-full h-full object-cover; }
 
   .badge-new {
-    @apply absolute top-3 left-3 inline-flex items-center gap-1.5
-           h-6 px-2.5 rounded-full bg-bg/90 backdrop-blur-sm
-           uppercase tracking-label text-[10px] text-ink font-medium;
-  }
-  .badge-new::before {
-    content: '';
-    @apply inline-block w-1.5 h-1.5 rounded-full bg-accent;
+    @apply absolute top-3 left-3 inline-flex items-center
+           h-6 px-3 rounded-full bg-bg/85 backdrop-blur-sm
+           uppercase text-[10px] text-ink font-medium;
+    letter-spacing: 0.18em;
   }
 
   .heart-chip {
