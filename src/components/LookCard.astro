@@ -1,0 +1,19 @@
+---
+import type { Look } from '../lib/data';
+import { styleBySlug } from '../lib/data';
+
+interface Props { look: Look; widthClass?: string; }
+const { look, widthClass = 'w-full' } = Astro.props as Props;
+const style = styleBySlug(look.style);
+---
+<article class={`${widthClass} group`}>
+  <a href={`/outfits/${look.id}`} class="block">
+    <div class="relative block w-full aspect-[3/4] overflow-hidden bg-surface border border-hairline">
+      <img src={look.heroImage} alt={look.title} loading="lazy" width="900" height="1200" class="w-full h-full object-cover" />
+    </div>
+    <div class="mt-3">
+      <h3 class="font-serif text-[18px] text-ink leading-tight">{look.title}</h3>
+      {style && <p class="mt-1 label">{style.label}</p>}
+    </div>
+  </a>
+</article>

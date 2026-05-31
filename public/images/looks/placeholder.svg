@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1200" role="img" aria-label="Look placeholder">
+  <rect width="900" height="1200" fill="#FDFBF7"/>
+  <rect x="40" y="40" width="820" height="1120" fill="none" stroke="#E5DFD3" stroke-width="1" stroke-dasharray="6 6"/>
+  <g transform="translate(450 540)" fill="none" stroke="#C9C0AE" stroke-width="1.5">
+    <circle cx="0" cy="-90" r="34"/>
+    <path d="M-70 60 Q0 -10 70 60 L60 220 L-60 220 Z"/>
+    <line x1="-40" y1="220" x2="-50" y2="380"/>
+    <line x1="40"  y1="220" x2="50"  y2="380"/>
+  </g>
+  <text x="450" y="980" font-family="Fraunces,Georgia,serif" font-size="22" font-style="italic"
+        text-anchor="middle" fill="#6B655B">Look Photo</text>
+  <text x="450" y="1010" font-family="Inter,system-ui,sans-serif" font-size="12"
+        text-anchor="middle" fill="#9C957F">Replace via looks.json → heroImage</text>
+</svg>

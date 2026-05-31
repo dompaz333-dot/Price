@@ -1,0 +1,62 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import LookCard from '../../components/LookCard.astro';
+import { looks, styles } from '../../lib/data';
+---
+<Base title="Looks — MalikFits" description="Curated outfits styled on Malik. Tap any look to shop the pieces.">
+  <Breadcrumb items={[{ href: '/', label: 'Home' }, { label: 'Looks' }]} />
+
+  <div class="page-max page-pad mt-6 mb-8">
+    <h1 class="font-serif text-[32px] sm:text-[40px] text-ink leading-tight">Looks</h1>
+    <p class="mt-3 text-ink-muted max-w-xl">
+      Tap a look to see every piece and shop the fit.
+    </p>
+  </div>
+
+  <div class="page-max page-pad scroll-x mb-8" id="style-chips">
+    <button class="chip chip-active" data-style="all">All</button>
+    {styles.map(s => (
+      <button class="chip" data-style={s.slug}>{s.label}</button>
+    ))}
+  </div>
+
+  <section class="page-max page-pad">
+    <div id="looks-grid" class="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-5">
+      {looks.map(l => (
+        <div class="look-item" data-style={l.style}>
+          <LookCard look={l} />
+        </div>
+      ))}
+    </div>
+    <p id="empty-state" class="hidden text-ink-muted text-sm mt-6">No looks in this style yet.</p>
+  </section>
+</Base>
+
+<script>
+  const params = new URLSearchParams(location.search);
+  const initial = params.get('style') ?? 'all';
+
+  const apply = (style: string) => {
+    document.querySelectorAll<HTMLElement>('.look-item').forEach(el => {
+      const match = style === 'all' || el.dataset.style === style;
+      el.style.display = match ? '' : 'none';
+    });
+    document.querySelectorAll<HTMLButtonElement>('#style-chips .chip').forEach(btn => {
+      btn.classList.toggle('chip-active', btn.dataset.style === style);
+    });
+    const visible = document.querySelectorAll<HTMLElement>('.look-item:not([style*="display: none"])').length;
+    document.getElementById('empty-state')!.classList.toggle('hidden', visible > 0);
+    const url = new URL(location.href);
+    if (style === 'all') url.searchParams.delete('style'); else url.searchParams.set('style', style);
+    history.replaceState(null, '', url.toString());
+  };
+
+  document.getElementById('style-chips')!.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('.chip');
+    if (!btn) return;
+    apply(btn.dataset.style!);
+  });
+
+  apply(initial);
+</script>

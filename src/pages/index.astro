@@ -1,0 +1,77 @@
+---
+import Base from '../layouts/Base.astro';
+import ProductCard from '../components/ProductCard.astro';
+import LookCard from '../components/LookCard.astro';
+import SectionHeader from '../components/SectionHeader.astro';
+import { newReleases, looks, categories } from '../lib/data';
+
+const featuredLooks = looks.slice(0, 4);
+const newDrops      = newReleases(10);
+---
+<Base>
+  {/* HERO */}
+  <section class="relative">
+    <div class="relative w-full aspect-[4/5] sm:aspect-[16/9] max-h-[88vh] overflow-hidden bg-surface">
+      <img src="/images/hero.svg" alt="Malik wearing the latest fit" width="1200" height="1500"
+           class="w-full h-full object-cover" fetchpriority="high" />
+      <div class="absolute inset-0 flex flex-col justify-end p-6 sm:p-12 bg-gradient-to-t from-bg/70 via-transparent to-transparent">
+        <p class="label text-ink">New this week</p>
+        <h1 class="mt-2 font-serif text-[36px] sm:text-[56px] leading-[1.05] text-ink max-w-[14ch]">
+          Modern men's style, ready to shop.
+        </h1>
+        <div class="mt-5 flex gap-3">
+          <a href="/outfits" class="btn-primary">Shop the latest looks</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {/* NEW RELEASES */}
+  <section class="page-max page-pad section-y">
+    <SectionHeader label="New Releases" title="Fresh drops." href="/catalog" hrefLabel="Show all" />
+    <div class="scroll-x">
+      {newDrops.map(p => <ProductCard product={p} widthClass="w-[62%] sm:w-[32%] lg:w-[22%]" />)}
+    </div>
+  </section>
+
+  <hr class="page-max page-pad" />
+
+  {/* FEATURED LOOKS */}
+  <section class="page-max page-pad section-y">
+    <SectionHeader label="Featured Looks" title="Get the fit." href="/outfits" hrefLabel="All looks" />
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
+      {featuredLooks.map(l => <LookCard look={l} />)}
+    </div>
+  </section>
+
+  <hr class="page-max page-pad" />
+
+  {/* SHOP BY CATEGORY */}
+  <section class="page-max page-pad section-y">
+    <SectionHeader label="Categories" title="Shop by category." />
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-5">
+      {categories.map(c => (
+        <a href={`/catalog/${c.slug}`} class="group">
+          <div class="relative aspect-square overflow-hidden bg-surface border border-hairline">
+            <img src={c.image} alt="" width="400" height="400" loading="lazy"
+                 class="w-full h-full object-cover transition-transform group-hover:scale-[1.02]" />
+            <div class="absolute inset-x-0 bottom-0 p-3 bg-gradient-to-t from-bg/85 to-transparent">
+              <p class="font-serif text-[18px] text-ink">{c.label}</p>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  {/* EDITORIAL STRIP */}
+  <section class="hairline">
+    <div class="page-max page-pad py-16 sm:py-24 text-center max-w-3xl mx-auto">
+      <p class="label mb-4">Meet Malik</p>
+      <p class="font-serif text-[22px] sm:text-[28px] text-ink leading-snug">
+        Curated weekly. Built for impulse — minus the chaos.
+      </p>
+      <a href="/about" class="btn-text mt-6 inline-flex">Read more →</a>
+    </div>
+  </section>
+</Base>

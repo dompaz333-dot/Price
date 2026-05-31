@@ -1,0 +1,48 @@
+---
+import Base from '../../layouts/Base.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import ProductCard from '../../components/ProductCard.astro';
+import { categories, productsByCategory, categoryBySlug } from '../../lib/data';
+
+export function getStaticPaths() {
+  return categories.map(c => ({ params: { category: c.slug } }));
+}
+
+const { category } = Astro.params;
+const cat = categoryBySlug(category!);
+if (!cat) throw new Error(`Unknown category: ${category}`);
+
+const list = productsByCategory(cat.slug).sort((a, b) =>
+  (b.isNew ? 1 : 0) - (a.isNew ? 1 : 0) || a.name.localeCompare(b.name)
+);
+---
+<Base title={`${cat.label} — MalikFits`}
+      description={`Shop ${cat.label.toLowerCase()} from the MalikFits catalog.`}>
+  <Breadcrumb items={[
+    { href: '/', label: 'Home' },
+    { href: '/catalog', label: 'Catalog' },
+    { label: cat.label }
+  ]} />
+
+  <div class="page-max page-pad mt-6 mb-10 flex items-end justify-between gap-4">
+    <h1 class="font-serif text-[32px] sm:text-[40px] text-ink leading-tight">{cat.label}</h1>
+    <p class="text-sm text-ink-muted hidden sm:block">{list.length} pieces</p>
+  </div>
+
+  <div class="page-max page-pad scroll-x mb-8">
+    <a href="/catalog" class="chip">All</a>
+    {categories.map(c => (
+      <a href={`/catalog/${c.slug}`} class={`chip ${c.slug === cat.slug ? 'chip-active' : ''}`}>{c.label}</a>
+    ))}
+  </div>
+
+  <section class="page-max page-pad">
+    {list.length === 0 ? (
+      <p class="text-ink-muted text-sm">No pieces in this category yet.</p>
+    ) : (
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-5">
+        {list.map(p => <ProductCard product={p} />)}
+      </div>
+    )}
+  </section>
+</Base>

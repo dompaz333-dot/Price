@@ -1,0 +1,22 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+---
+<Base title="About — MalikFits" description="MalikFits is an editorial guide to modern men's style, curated weekly.">
+  <Breadcrumb items={[{ href: '/', label: 'Home' }, { label: 'About' }]} />
+
+  <section class="page-max page-pad mt-10 max-w-2xl">
+    <p class="label mb-3">About</p>
+    <h1 class="font-serif text-[36px] sm:text-[48px] text-ink leading-tight">Meet Malik.</h1>
+    <p class="mt-6 text-ink-muted text-[17px] leading-relaxed">
+      MalikFits is a weekly edit of men's outfits — smart casual, quiet luxury, streetwear,
+      summer, tailoring — built around one consistent point of view. Every look on this site is
+      shoppable: tap the fit, tap the piece, buy it from the retailer in one tap.
+    </p>
+    <p class="mt-4 text-ink-muted text-[17px] leading-relaxed">
+      Some of the imagery is AI-generated. Every retailer link is an affiliate link — if you
+      buy through MalikFits, we earn a small commission at no extra cost to you. That's how the
+      site stays free.
+    </p>
+  </section>
+</Base>

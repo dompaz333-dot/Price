@@ -1,0 +1,107 @@
+@import '@fontsource-variable/fraunces/index.css';
+@import '@fontsource-variable/inter/index.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+  body {
+    @apply bg-bg text-ink font-sans antialiased;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+  ::selection {
+    background: #1A1714;
+    color: #F7F4EE;
+  }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+  img, svg, video { display: block; max-width: 100%; height: auto; }
+  hr { @apply border-0 border-t border-hairline; }
+  h1, h2, h3, h4 { @apply font-serif font-normal text-ink; line-height: 1.15; }
+}
+
+@layer components {
+  .page-pad   { @apply px-5 sm:px-10 lg:px-20; }
+  .page-max   { @apply mx-auto max-w-page; }
+  .section-y  { @apply py-16 sm:py-24; }
+  .hairline   { @apply border-t border-hairline; }
+
+  .label {
+    @apply font-sans uppercase tracking-label text-[12px] font-medium text-ink-muted;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center
+           h-12 px-6 w-full sm:w-auto
+           bg-ink text-bg
+           font-medium uppercase tracking-button text-[13px]
+           transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink;
+  }
+  .btn-secondary {
+    @apply inline-flex items-center justify-center
+           h-9 px-4
+           border border-ink text-ink bg-transparent
+           font-medium uppercase tracking-button text-[12px]
+           transition-colors hover:bg-ink hover:text-bg;
+  }
+  .btn-text {
+    @apply inline-flex items-center gap-1
+           font-medium uppercase tracking-button text-[12px] text-ink
+           underline decoration-hairline underline-offset-4
+           transition-colors hover:decoration-accent;
+  }
+
+  .chip {
+    @apply inline-flex items-center h-9 px-4
+           border border-hairline text-ink-muted bg-surface
+           uppercase tracking-button text-[12px]
+           transition-colors hover:border-ink hover:text-ink whitespace-nowrap;
+  }
+  .chip-active {
+    @apply border-ink text-ink bg-ink/[0.04];
+  }
+
+  .card-img {
+    @apply relative block w-full aspect-[4/5] overflow-hidden bg-surface border border-hairline;
+  }
+  .card-img img, .card-img svg { @apply w-full h-full object-cover; }
+
+  .badge-new {
+    @apply absolute top-2 left-2 inline-flex items-center gap-1.5
+           h-6 px-2 bg-bg/95 border border-hairline
+           uppercase tracking-label text-[10px] text-ink font-medium;
+  }
+  .badge-new::before {
+    content: '';
+    @apply inline-block w-1.5 h-1.5 rounded-full bg-accent;
+  }
+
+  .heart-chip {
+    @apply absolute top-2 right-2 inline-flex items-center justify-center
+           w-8 h-8 bg-bg/95 border border-hairline text-ink
+           transition-colors hover:text-accent;
+  }
+  .heart-chip[data-saved="true"] { @apply text-accent; }
+
+  .scroll-x {
+    @apply flex gap-3 overflow-x-auto snap-x snap-mandatory
+           -mx-5 px-5 sm:-mx-10 sm:px-10 lg:-mx-20 lg:px-20;
+    scrollbar-width: none;
+  }
+  .scroll-x::-webkit-scrollbar { display: none; }
+  .scroll-x > * { @apply snap-start shrink-0; }
+
+  .input {
+    @apply w-full h-12 px-4 bg-surface border border-hairline text-ink placeholder:text-ink-muted
+           focus:outline-none focus:border-ink;
+  }
+}

@@ -1,0 +1,138 @@
+[
+  {
+    "id": "camel-coat-sunday",
+    "title": "Camel Coat Sunday",
+    "style": "quiet-luxury",
+    "heroImage": "/images/looks/placeholder.svg",
+    "description": "Soft tailoring for a slow morning.",
+    "productIds": [
+      "jacket-camel-overcoat-001",
+      "tshirt-cream-boxy-001",
+      "jeans-ecru-straight-001",
+      "shoes-cream-loafer-001",
+      "acc-cashmere-scarf-005"
+    ]
+  },
+  {
+    "id": "stone-blazer-evening",
+    "title": "Stone Blazer Evening",
+    "style": "smart-casual",
+    "heroImage": "/images/looks/placeholder.svg",
+    "description": "Unstructured tailoring with quiet edges.",
+    "productIds": [
+      "jacket-stone-blazer-003",
+      "tshirt-white-essential-003",
+      "jeans-mid-wash-tapered-002",
+      "shoes-white-leather-002",
+      "acc-leather-belt-001"
+    ]
+  },
+  {
+    "id": "weekend-cream-on-cream",
+    "title": "Weekend Cream On Cream",
+    "style": "quiet-luxury",
+    "heroImage": "/images/looks/placeholder.svg",
+    "description": "Tonal layering, zero noise.",
+    "productIds": [
+      "jacket-cream-bomber-002",
+      "tshirt-sand-pocket-004",
+      "jeans-ecru-straight-001",
+      "shoes-canvas-low-006"
+    ]
+  },
+  {
+    "id": "city-streetwear-grey",
+    "title": "City Grey Streetwear",
+    "style": "streetwear",
+    "heroImage": "/images/looks/placeholder.svg",
+    "description": "Heavyweight basics with weight on the foot.",
+    "productIds": [
+      "tshirt-charcoal-heavy-002",
+      "jacket-grey-shacket-007",
+      "jeans-black-slim-004",
+      "shoes-chunky-sneaker-007",
+      "acc-canvas-cap-002"
+    ]
+  },
+  {
+    "id": "raw-denim-monday",
+    "title": "Raw Denim Monday",
+    "style": "streetwear",
+    "heroImage": "/images/looks/placeholder.svg",
+    "description": "Honest denim, honest sneakers.",
+    "productIds": [
+      "tshirt-navy-stripe-006",
+      "jacket-navy-harrington-006",
+      "jeans-raw-selvedge-003",
+      "shoes-white-leather-002"
+    ]
+  },
+  {
+    "id": "linen-summer-port",
+    "title": "Linen Summer Port",
+    "style": "summer",
+    "heroImage": "/images/looks/placeholder.svg",
+    "description": "Built for warm wind and cold drinks.",
+    "productIds": [
+      "tshirt-stone-linen-007",
+      "shorts-cream-linen-001",
+      "shoes-canvas-low-006",
+      "acc-tortoise-sunglasses-006"
+    ]
+  },
+  {
+    "id": "pleated-short-rooftop",
+    "title": "Pleated Short Rooftop",
+    "style": "summer",
+    "heroImage": "/images/looks/placeholder.svg",
+    "description": "Tailored from the waist up, easy from the waist down.",
+    "productIds": [
+      "tshirt-white-essential-003",
+      "shorts-stone-pleated-003",
+      "shoes-tan-derby-003",
+      "acc-leather-belt-001"
+    ]
+  },
+  {
+    "id": "navy-tailoring-evening",
+    "title": "Navy Tailoring Evening",
+    "style": "tailoring",
+    "heroImage": "/images/looks/placeholder.svg",
+    "description": "Classic shapes, modern proportions.",
+    "productIds": [
+      "jacket-stone-blazer-003",
+      "tshirt-charcoal-heavy-002",
+      "jeans-mid-wash-tapered-002",
+      "shoes-black-chelsea-004",
+      "acc-tortoise-sunglasses-006"
+    ]
+  },
+  {
+    "id": "olive-chore-everyday",
+    "title": "Olive Chore Everyday",
+    "style": "smart-casual",
+    "heroImage": "/images/looks/placeholder.svg",
+    "description": "A workwear coat does most of the talking.",
+    "productIds": [
+      "jacket-olive-chore-005",
+      "tshirt-olive-ribbed-005",
+      "jeans-vintage-bootcut-006",
+      "shoes-tan-derby-003",
+      "acc-leather-wallet-004"
+    ]
+  },
+  {
+    "id": "black-leather-night",
+    "title": "Black Leather Night",
+    "style": "tailoring",
+    "heroImage": "/images/looks/placeholder.svg",
+    "description": "Sharp lines, low gloss.",
+    "productIds": [
+      "jacket-black-leather-004",
+      "tshirt-charcoal-heavy-002",
+      "jeans-black-slim-004",
+      "shoes-black-chelsea-004",
+      "acc-silver-chain-003"
+    ]
+  }
+]
